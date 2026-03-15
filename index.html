@@ -4,11 +4,11 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 <title>EcoVision</title>
-<link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="%2322C55E"/><stop offset="100%" stop-color="%2316A34A"/></linearGradient></defs><circle cx="100" cy="100" r="72" fill="none" stroke="url(%23g)" stroke-width="16"/></svg>'>
+<link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="%23166534"/><stop offset="100%" stop-color="%23064e3b"/></linearGradient></defs><circle cx="100" cy="100" r="72" fill="none" stroke="url(%23g)" stroke-width="16"/></svg>'>
 <meta name="description" content="EcoVision — check your phone’s value and recycle or resell responsibly.">
 <style>
-:root{--bg:#0a0b0f;--card:#11131a;--text:#e9ecf1;--muted:#cfd6e4;--accent:#1f8cff;--accent2:#22c55e;--warn:#ffdf7f;--line:rgba(255,255,255,.08);--pill:#0f141c}
-:root[data-theme="light"]{--bg:#ffffff;--card:#f6fef9;--text:#0a0b0f;--muted:#334155;--accent:#16a34a;--accent2:#22c55e;--warn:#a16207;--line:rgba(0,0,0,.10);--pill:#ffffff}
+:root{--bg:#0a0b0f;--card:#11131a;--text:#e9ecf1;--muted:#cfd6e4;--accent:#1f8cff;--accent2:#15803d;--accent2-hover:#166534;--warn:#ffdf7f;--line:rgba(255,255,255,.08);--pill:#0f141c}
+:root[data-theme="light"]{--bg:#ffffff;--card:#f8fafc;--text:#0a0b0f;--muted:#334155;--accent:#2563eb;--accent2:#166534;--warn:#a16207;--line:rgba(0,0,0,.10);--pill:#ffffff}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
@@ -16,20 +16,20 @@ html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:
 /* Intro */
 .splash{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;background:var(--bg);transition:opacity .35s ease,visibility .35s ease}
 .splash.hide{opacity:0;visibility:hidden}
-.word{display:flex;gap:4px;align-items:baseline;filter:drop-shadow(0 18px 40px rgba(34,197,94,.25))}
-.letter{font-weight:900;font-size:42px;line-height:1;color:#c8ffd8;letter-spacing:.5px;opacity:0;transform:translateY(24px) scale(.9)}
+.word{display:flex;gap:4px;align-items:baseline;filter:drop-shadow(0 18px 40px rgba(21,128,61,.2))}
+.letter{font-weight:900;font-size:42px;line-height:1;color:#86efac;letter-spacing:.5px;opacity:0;transform:translateY(24px) scale(.9)}
 @keyframes pop {0%{opacity:0;transform:translateY(24px) scale(.9) rotate(-3deg)}60%{opacity:1;transform:translateY(-6px) scale(1.06)}100%{opacity:1;transform:translateY(0) scale(1)}}
 .letter.show{animation:pop .55s cubic-bezier(.2,1,.2,1) forwards}
 
 .i-wrap {position:relative;display:inline-flex;justify-content:center}
-.dotLeaf{position:absolute;top:-8px;width:17px;height:17px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#a7f3d0,#22c55e 65%,#16a34a);opacity:0;z-index:2}
+.dotLeaf{position:absolute;top:-8px;width:17px;height:17px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#16a34a,#14532d 65%,#064e3b);opacity:0;z-index:2}
 @keyframes fall {0%{opacity:0;transform:translate(-15px,-30px) rotate(-25deg)}80%{opacity:1;transform:translate(0,3px) rotate(4deg)}100%{opacity:1;transform:translate(0,0) rotate(0)}}
 .dotLeaf.show{animation:fall .7s .55s ease forwards}
 
-/* Header / layout */
+/* Layout */
 header.app{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;background:var(--card);border-bottom:1px solid var(--line)}
 .brand{display:flex;gap:12px;align-items:center}
-.logo{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(180deg,rgba(34,197,94,.25),rgba(34,197,94,.10))}
+.logo{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(180deg,rgba(21,128,61,.3),rgba(6,78,59,.1))}
 .logo svg{width:26px;height:26px}
 h1{margin:0;font-size:18px;font-weight:900}
 .tag{margin:2px 0 0;font-size:12px;color:#94a3b8}
@@ -43,124 +43,67 @@ p{color:var(--muted);line-height:1.55;margin:0 0 10px}
 ul.clean{margin:10px 0 0 0;padding:0;list-style:none}
 ul.clean li{display:flex;gap:8px;align-items:flex-start;margin:8px 0}
 
+/* Phone Mockup */
 .phone{position:relative;margin:0 auto;width:312px;max-width:100%;aspect-ratio:9/19;border-radius:20px;padding:6px;background:linear-gradient(180deg,#0d0f14,#0a0c11);border:1px solid var(--line);box-shadow:0 18px 50px rgba(0,0,0,.35)}
 .screen{position:absolute;inset:6px;border-radius:16px;overflow:hidden;background:#0a0f16;display:grid}
 .stage{position:absolute;inset:0;display:grid;place-items:center;opacity:0;transform:translateY(8px) scale(.985);transition:opacity .42s ease,transform .42s ease}
 .stage.active{opacity:1;transform:translateY(0) scale(1)}
 .drawer{position:absolute;inset:0;display:grid;grid-template-rows:auto 1fr auto;gap:8px;padding:10px 12px;background:#0b1017}
-.drawer .search{display:flex;align-items:center;gap:8px;background:#0d1117;border:1px solid var(--line);border-radius:999px;padding:8px 12px;color:#9fb3c8;font-size:12px}
-.drawer .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:6px 0}
-.appicon{display:grid;place-items:center;height:72px;border-radius:16px;background:linear-gradient(180deg,#0f141c,#0e1218);border:1px solid var(--line);position:relative;overflow:hidden}
-.appicon span{position:absolute;bottom:6px;left:0;right:0;text-align:center;font-size:11px;color:#cfe7ff}
-.appicon.eco{background:linear-gradient(135deg,#0f1d15,#0b2b1a);border-color:rgba(98,255,158,.35)}
 .dock{display:flex;justify-content:space-around;padding:8px;background:#0d1117;border:1px solid var(--line);border-radius:18px}
-.dock .dockicon{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;background:#0f141c;border:1px solid var(--line)}
-.pager{display:flex;justify-content:center;gap:6px}
-.dot{width:6px;height:6px;border-radius:999px;background:#3a475a}
-.dot.active{background:var(--accent2)}
-.appframe{position:absolute;inset:0;display:grid;grid-template-rows:auto auto 1fr auto;background:#0b1017}
-.statusbar{display:flex;justify-content:space-between;align-items:center;padding:6px 8px;border-bottom:1px solid var(--line);font-size:10px;color:#cfe7ff}
-.appbar{display:flex;align-items:center;gap:8px;padding:10px 12px;border-bottom:1px solid var(--line);font-weight:800}
-.viewport{position:relative;padding:12px}
-.ui{background:#0d1117;border:1px solid var(--line);border-radius:12px;padding:12px;color:#cfe7ff;width:100%}
-.row{display:flex;gap:8px;flex-wrap:wrap}
-.pill{display:inline-block;padding:6px 10px;border-radius:999px;border:1px solid var(--line);background:var(--pill);font-size:12px;cursor:pointer}
-.pill[aria-pressed="true"]{outline:2px solid var(--accent2)}
-.k{font-size:11px;color:#8ea1b8;margin-bottom:4px}
-.v{font-weight:900}
-.preview{display:flex;gap:10px;justify-content:center}
-.ph{width:96px;height:140px;border-radius:8px;border:1px solid var(--line);background:#06101a;display:grid;place-items:center;overflow:hidden}
-.ph img{display:block;max-width:100%;max-height:100%}
-.photoWrap{position:relative;width:100%;height:62%;border-radius:8px;border:1px solid var(--line);background:#061018}
-.hot{position:absolute;border-radius:50%;opacity:.9;mix-blend-mode:screen}
-.hot.red{background:radial-gradient(circle at 50% 50%,rgba(255,0,72,.9),rgba(255,0,72,.28) 60%,transparent 70%)}
-.hot.orange{background:radial-gradient(circle at 50% 50%,rgba(255,165,0,.95),rgba(255,165,0,.28) 60%,transparent 70%)}
-.gauge{width:68%;max-width:210px;aspect-ratio:1;border-radius:50%;display:grid;place-items:center;position:relative;background:conic-gradient(var(--accent2) var(--pct,40%),#243042 0)}
-.gauge::after{content:"";position:absolute;inset:12%;background:#0b0f16;border-radius:50%}
-.price{position:absolute;font-weight:900;font-size:22px}
+.appicon{display:grid;place-items:center;height:72px;border-radius:16px;background:linear-gradient(180deg,#0f141c,#0e1218);border:1px solid var(--line);position:relative;overflow:hidden}
+.appicon.eco{background:linear-gradient(135deg,#064e3b,#14532d);border-color:rgba(34,197,94,.35)}
 
-.progress{height:6px;border-radius:999px;background:#0d1117;border:1px solid var(--line);overflow:hidden;margin:14px 0 6px}
-.bar{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .25s}
-.label{font-size:12px;color:#cfe7ff;text-align:center;margin-top:6px}
-
-.page2{scroll-margin-top:70px}
-.hidden{display:none}
-.formCard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
-form.eco{display:grid;gap:12px}
-label span{display:block;font-size:13px;color:var(--muted);margin-bottom:4px}
-input,select,button{font:inherit;color:inherit}
-select,input[type="file"],input[type="text"],input[type="number"]{width:100%;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--pill)}
+/* Forms */
+.eco-form-section{display:grid;gap:18px}
+.q-box span{display:block;font-size:13px;font-weight:600;color:var(--muted);margin-bottom:8px}
+select,input[type="file"],input[type="text"],input[type="number"]{width:100%;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--pill);color:inherit}
 .rangeRow{display:flex;align-items:center;gap:10px}
-.rangeRow output{min-width:54px;text-align:right;font-weight:800}
-input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:10px;border-radius:999px;background:linear-gradient(var(--accent2),var(--accent2)) 0/0% 100% no-repeat, var(--pill);border:1px solid var(--line);outline:0}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--accent2);border:2px solid #0b0f16;box-shadow:0 0 0 3px rgba(34,197,94,.25);cursor:pointer}
-input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:#22c55e;border:2px solid #0b0f16;box-shadow:0 0 0 3px rgba(34,197,94,.25);cursor:pointer}
-input[type=range]::-moz-range-track{background:transparent}
-.actions{display:flex;gap:8px;flex-wrap:wrap}
-.primary{background:var(--accent2);color:#053a16;border:none;padding:12px 16px;border-radius:12px;font-weight:900;cursor:pointer}
-.ghost{background:transparent;border:1px solid var(--line);border-radius:12px;padding:12px 16px;font-weight:800;color:var(--text)}
+input[type=range]{-webkit-appearance:none;width:100%;height:10px;border-radius:999px;background:linear-gradient(var(--accent2),var(--accent2)) 0/0% 100% no-repeat, var(--pill);border:1px solid var(--line)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--accent2);border:2px solid #0b0f16}
+.pill{display:inline-block;padding:8px 12px;border-radius:999px;border:1px solid var(--line);background:var(--pill);font-size:12px;cursor:pointer;transition:all .2s;color:var(--muted)}
+.pill[aria-pressed="true"]{background:var(--accent2);color:white;border-color:var(--accent2)}
+
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.primary{background:var(--accent2);color:white;border:none;padding:12px 16px;border-radius:12px;font-weight:900;cursor:pointer}
+.primary:hover{background:var(--accent2-hover)}
+.ghost{background:transparent;border:1px solid var(--line);border-radius:12px;padding:12px 16px;font-weight:800;color:var(--text);cursor:pointer}
+
+/* Result UI */
 .step{display:none;opacity:0;transform:translateY(6px);transition:opacity .25s ease,transform .25s ease}
 .step.show{display:block;opacity:1;transform:translateY(0)}
-.resultCard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin-top:12px}
-.badges{display:flex;gap:8px;flex-wrap:wrap}
-.badge{padding:8px 12px;border-radius:10px;border:1px solid var(--line);background:var(--pill);cursor:pointer;font-weight:700}
-.warn{color:#b45309}
+.gauge{width:68%;max-width:210px;aspect-ratio:1;border-radius:50%;display:grid;place-items:center;position:relative;background:conic-gradient(var(--accent2) var(--pct,40%),#243042 0)}
+.gauge::after{content:"";position:absolute;inset:12%;background:#0b0f16;border-radius:50%}
+.price{position:absolute;font-weight:900;font-size:22px;z-index:2}
 
+/* Chat & Sheets */
 .sheet{position:fixed;left:50%;bottom:12px;transform:translateX(-50%) translateY(120%);z-index:120;background:var(--card);border:1px solid var(--line);border-radius:16px;max-width:820px;width:calc(100vw - 24px);box-shadow:0 16px 40px rgba(0,0,0,.4);transition:transform .35s ease}
 .sheet.open{transform:translateX(-50%) translateY(0)}
-.sheetHead{display:flex;align-items:center;justify-content:space-between;padding:12px;border-bottom:1px solid var(--line)}
-.sheetBody{padding:14px;display:grid;gap:12px}
-.sheetGrid{display:grid;gap:10px}
-@media(min-width:720px){.sheetGrid{grid-template-columns:1.1fr 1.2fr}}
-.sheetBody code{background:var(--pill);padding:8px 10px;border-radius:8px;border:1px solid var(--line);display:block;white-space:pre-wrap}
-.linkRow{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
-.linkRow a{text-decoration:none;border:1px solid var(--line);padding:6px 10px;border-radius:8px;background:var(--pill);color:var(--text);font-weight:700}
-
-.chatFab{position:fixed;right:16px;bottom:16px;z-index:80;width:64px;height:64px;border-radius:50%;background:var(--accent2);color:#053a16;border:none;font-weight:900;display:grid;place-items:center;cursor:pointer;box-shadow:0 10px 26px rgba(0,0,0,.35)}
-.chatPanel{position:fixed;right:16px;bottom:92px;width:min(600px,calc(100vw - 32px));max-height:88vh;display:none;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;z-index:85}
+.chatFab{position:fixed;right:16px;bottom:16px;z-index:80;width:64px;height:64px;border-radius:50%;background:var(--accent2);color:white;border:none;cursor:pointer;display:grid;place-items:center;box-shadow:0 10px 26px rgba(0,0,0,.35)}
+.chatPanel{position:fixed;right:16px;bottom:92px;width:min(500px,calc(100vw - 32px));max-height:80vh;display:none;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:16px;z-index:85}
 .chatPanel.open{display:flex}
-.chatHead{display:flex;align-items:center;justify-content:space-between;padding:12px;border-bottom:1px solid var(--line)}
-.chatTitle{display:flex;align-items:center;gap:8px;font-weight:900}
-.chatBody{padding:14px;overflow:auto;display:flex;flex-direction:column;gap:10px}
-.chatMsg{max-width:85%;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:var(--pill);line-height:1.45}
-.chatMsg.bot{align-self:flex-start}
-.chatMsg.user{align-self:flex-end}
-.chatFoot{display:flex;gap:8px;padding:10px;border-top:1px solid var(--line)}
-.chatFoot input{flex:1;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--pill);color:var(--text)}
-.chatFoot button{padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:transparent;color:var(--text);font-weight:800;cursor:pointer}
-.spin{display:inline-block;width:16px;height:16px;border:3px solid rgba(255,255,255,.25);border-top-color:var(--accent2);border-radius:50%;animation:spin 1s linear infinite;vertical-align:middle}
+
+.spin{display:inline-block;width:16px;height:16px;border:3px solid rgba(255,255,255,.2);border-top-color:white;border-radius:50%;animation:spin 1s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 .crash{position:fixed;inset:0;z-index:5000;background:var(--bg);display:none;align-items:center;justify-content:center;flex-direction:column}
 .crash.show{display:flex}
-.crash h1{margin:0;font-size:42px}
-.crash p{color:#848d99}
-.small{font-size:12px;color:#cfe7f0}
-.err{position:fixed;left:16px;right:16px;bottom:16px;z-index:5001;background:#220b0b;color:#ffdada;border:1px solid #552020;padding:10px 12px;border-radius:10px;display:none}
-.err.show{display:block}
+.hidden{display:none}
 </style>
 </head>
 <body>
 
-<div id="splash" class="splash" role="dialog" aria-label="EcoVision intro">
-  <div class="word" aria-hidden="true">
-    <span class="letter">E</span>
-    <span class="letter">c</span>
-    <span class="letter">o</span>
-    <span class="letter">V</span>
-    <span class="i-wrap">
-      <span class="letter">&#305;</span>
-      <span class="dotLeaf"></span>
-    </span>
-    <span class="letter">s</span>
-    <span class="letter">i</span>
-    <span class="letter">o</span>
-    <span class="letter">n</span>
+<div id="splash" class="splash">
+  <div class="word">
+    <span class="letter">E</span><span class="letter">c</span><span class="letter">o</span><span class="letter">V</span>
+    <span class="i-wrap"><span class="letter">ı</span><span class="dotLeaf"></span></span>
+    <span class="letter">s</span><span class="letter">i</span><span class="letter">o</span><span class="letter">n</span>
   </div>
 </div>
 
 <svg width="0" height="0" style="position:absolute">
   <defs>
-    <linearGradient id="leafCore" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#22C55E"/><stop offset="100%" stop-color="#16A34A"/></linearGradient>
+    <linearGradient id="leafCore" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#15803d"/><stop offset="100%" stop-color="#064e3b"/>
+    </linearGradient>
     <g id="EcoMark">
       <circle cx="100" cy="100" r="72" fill="none" stroke="url(#leafCore)" stroke-width="8"/>
       <path d="M100 106 C112 100,124 100,130 104 C122 106,112 112,104 114 C101 114,99 110,100 106 Z" fill="url(#leafCore)"/>
@@ -171,15 +114,13 @@ input[type=range]::-moz-range-track{background:transparent}
 
 <header class="app">
   <div class="brand">
-    <div class="logo" aria-hidden="true"><svg viewBox="0 0 200 200"><use href="#EcoMark"/></svg></div>
+    <div class="logo"><svg viewBox="0 0 200 200"><use href="#EcoMark"/></svg></div>
     <div>
       <h1>EcoVision</h1>
       <div class="tag">Check value • Sell or Recycle • Do good</div>
     </div>
   </div>
-  <div class="actions-right">
-    <button id="themeBtn" class="btn" aria-pressed="false" title="Switch theme">🌞 Light Mode</button>
-  </div>
+  <button id="themeBtn" class="btn">🌞 Light Mode</button>
 </header>
 
 <main class="wrap">
@@ -187,412 +128,283 @@ input[type=range]::-moz-range-track{background:transparent}
     <div class="grid">
       <div>
         <h2>Check your phone’s value in minutes</h2>
-        <p>Upload a photo, answer a few quick questions, then choose to <b>get paid</b> or <b>recycle responsibly</b>.</p>
+        <p>Upload a photo and answer diagnostics to <b>get paid</b> or <b>recycle responsibly</b>.</p>
         <ul class="clean">
-          <li>✅ Fast estimate for visible damage.</li>
-          <li>🔒 Photo stays in your browser on this page.</li>
-          <li>🤝 Cash partners or donation centers.</li>
+          <li>✅ Fast AI estimate for visible damage.</li>
+          <li>✅ New: Component & accessory checks.</li>
+          <li>🔒 Privacy: Data stays in your browser.</li>
         </ul>
-        <div class="progress" aria-hidden="true" style="margin-top:16px"><div class="bar" id="bar"></div></div>
-        <div class="label" id="label">Walkthrough playing…</div>
-        <div style="margin-top:10px"><button id="nextBtn" class="primary" type="button">Next →</button></div>
+        <div style="margin-top:24px"><button id="nextBtn" class="primary">Get Started →</button></div>
       </div>
-
       <div>
-        <div class="phone" aria-label="EcoVision walkthrough">
+        <div class="phone">
           <div class="screen">
             <div class="stage active" id="s0">
               <div class="drawer">
-                <div class="search">🔎 Search apps</div>
-                <div class="grid">
-                  <div class="appicon"><span>Camera</span></div>
-                  <div class="appicon"><span>Mail</span></div>
-                  <div class="appicon"><span>Maps</span></div>
-                  <div class="appicon"><span>Music</span></div>
-                  <div class="appicon eco" id="ecoApp"><span>EcoVision</span></div>
-                  <div class="appicon"><span>Chat</span></div>
-                  <div class="appicon"><span>Files</span></div>
-                  <div class="appicon"><span>Calendar</span></div>
-                  <div class="appicon"><span>Browser</span></div>
-                  <div class="appicon"><span>Gallery</span></div>
+                <div style="background:#0d1117;border-radius:99px;padding:8px 12px;font-size:12px">🔎 Search apps</div>
+                <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
+                  <div class="appicon"></div><div class="appicon"></div><div class="appicon"></div><div class="appicon"></div>
+                  <div class="appicon eco"></div><div class="appicon"></div><div class="appicon"></div><div class="appicon"></div>
                 </div>
-                <div class="pager"><div class="dot active"></div><div class="dot"></div><div class="dot"></div></div>
-                <div class="dock"><div class="dockicon">📞</div><div class="dockicon">💬</div><div class="dockicon">🌐</div><div class="dockicon">📷</div></div>
-              </div>
-            </div>
-
-            <div class="stage" id="s1">
-              <div class="appframe">
-                <div class="statusbar"><div>09:41</div><div>📶 📡 🔋 87%</div></div>
-                <div class="appbar"><div style="font-weight:900">EcoVision</div></div>
-                <div class="viewport">
-                  <div class="stage active" id="v1">
-                    <div class="ui" style="text-align:center">
-                      <div style="font-size:18px;font-weight:900;margin-bottom:6px">EcoVision</div>
-                      <div style="width:28px;height:28px;border-radius:50%;border:3px solid rgba(255,255,255,.2);border-top-color:var(--accent2);margin:8px auto;animation:spin 1s linear infinite"></div>
-                      <div style="font-size:12px;color:#8ea1b8">Starting…</div>
-                    </div>
-                  </div>
-                  <div class="stage" id="v2">
-                    <div class="ui">
-                      <div style="display:flex;justify-content:space-between;align-items:center"><b>Upload phone photos</b><span class="pill" aria-pressed="false">Front & Back</span></div>
-                      <div class="preview" style="margin-top:10px">
-                        <div class="ph"><img id="frontImg" alt="Front phone" /></div>
-                        <div class="ph"><img id="backImg" alt="Back phone" /></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="stage" id="v3"><div class="photoWrap"><div class="hot red" style="width:88px;height:68px;left:18%;top:22%"></div><div class="hot orange" style="width:70px;height:60px;left:60%;top:52%"></div></div></div>
-                  <div class="stage" id="v4"><div class="ui"><div class="k">Model</div><div class="v">Generic Phone 12</div></div></div>
-                  <div class="stage" id="v5"><div class="ui"><div class="k">Purchased</div><div class="v">Oct 2021</div></div></div>
-                  <div class="stage" id="v6"><div class="ui"><div style="font-weight:900;margin-bottom:8px">Quick internals</div><div class="row"><span class="pill" aria-pressed="true">Turns on: Yes</span><span class="pill" aria-pressed="true">Cameras: Yes</span><span class="pill" aria-pressed="true">Charging: Yes</span><span class="pill" aria-pressed="true">Speakers: Yes</span><span class="pill" aria-pressed="true">Motherboard: No</span></div></div></div>
-                  <div class="stage" id="v7"><div class="gauge" id="gauge" style="--pct:66%"><div class="price" id="price">₹12,800</div></div></div>
-                  <div class="stage" id="v8"><div class="ui" style="text-align:center"><div style="font-weight:900">Recycle this item?</div><div class="row" style="margin-top:8px"><span class="pill">No</span><span class="pill">Yes</span></div></div></div>
-                  <div class="stage" id="v9"><div class="ui" style="text-align:center"><div style="font-weight:900">Share your location?</div><div class="row" style="margin-top:8px"><span class="pill">Allow Once</span><span class="pill">Allow While Using App</span></div></div></div>
-                  <div class="stage" id="v10"><div class="ui" style="text-align:center"><div style="font-weight:900">Do you want money from this?</div><div class="row" style="margin-top:8px"><span class="pill">Yes</span><span class="pill">No</span></div></div></div>
-                  <div class="stage" id="v11"><div class="ui" style="text-align:center"><div class="k">We can connect you to:</div><div class="badges" style="margin-top:8px"><span class="badge">Cashify</span><span class="badge">Zolopik</span><span class="badge">Servify</span><span class="badge">ReGlobe</span><span class="badge">Attero</span><span class="badge">Karo Sambhav</span></div></div></div>
-                  <div class="stage" id="v12"><div class="ui" style="text-align:center"><div class="k">Prefer to give it away yourself?</div><div class="badges" style="margin-top:8px"><span class="badge">e-Waste Center</span><span class="badge">City Hub</span><span class="badge">Green NGO</span></div></div></div>
-                  <div class="stage" id="v13"><div class="ui" style="text-align:center"><div class="warn"><b>⚠️ Be honest:</b> Price is from your inputs; not a dealer offer.</div></div></div>
-                </div>
-                <div class="navbar" style="border-top:1px solid var(--line);padding:8px 0;text-align:center;color:#cfe7ff">EcoVision</div>
+                <div class="dock"><div class="appicon" style="height:38px"></div><div class="appicon" style="height:38px"></div></div>
               </div>
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </section>
 
   <section id="page2" class="page2 hidden">
-    <div class="formCard">
-      <h2>Get your phone’s value</h2>
-      <p>Answer a few questions, upload a photo, then tap <b>Predict</b>. You’ll see your estimate and the full recycle/resell flow.</p>
-
-      <form class="eco" id="ecoForm" onsubmit="return false;">
-        <label><span>Phone model</span>
+    <div class="card">
+      <h2>Diagnostics Form</h2>
+      <p>Please provide details to calculate the resale/recycle value.</p>
+      
+      <form id="ecoForm" class="eco-form-section" onsubmit="return false;">
+        <div class="q-box">
+          <span>Phone model</span>
           <select id="model" required>
             <option value="" disabled selected>Select model</option>
-            <option>iPhone 11</option><option>iPhone 12</option><option>iPhone 13</option><option>iPhone 14</option><option>iPhone 15</option>
-            <option>Galaxy S20</option><option>Galaxy S21</option><option>Galaxy S22</option><option>Galaxy S23</option><option>Galaxy A52</option>
-            <option>OnePlus 7</option><option>OnePlus 8</option><option>OnePlus 9</option><option>OnePlus 10</option><option>OnePlus Nord 2</option>
-            <option>Redmi Note 9</option><option>Redmi Note 10</option><option>Redmi Note 11</option><option>Mi 10</option><option>Mi 11X</option>
-            <option>Vivo V20</option><option>Vivo V21</option><option>Vivo Y20</option><option>Vivo Y21</option><option>Vivo X60</option>
-            <option>Oppo F17</option><option>Oppo F19</option><option>Oppo Reno 6</option><option>Oppo A74</option><option>Oppo A55</option>
+            <option>iPhone 13</option><option>iPhone 14</option><option>iPhone 15</option>
+            <option>Galaxy S23</option><option>OnePlus 11</option><option>Pixel 8</option>
           </select>
-        </label>
+        </div>
 
-        <label><span>Age of the phone (years)</span>
-          <input id="age" type="number" min="0" max="12" step="0.5" placeholder="e.g., 2.5" required />
-        </label>
-
-        <label><span>Storage (GB)</span>
-          <select id="ssd" required>
-            <option value="" disabled selected>Select storage</option>
-            <option>16</option><option>32</option><option>64</option><option>128</option><option>256</option><option>512</option><option value="1024">1024</option>
-          </select>
-        </label>
-
-        <label><span>RAM (GB)</span>
-          <select id="ram" required>
-            <option value="" disabled selected>Select RAM</option>
-            <option>2</option><option>3</option><option>4</option><option>6</option><option>8</option><option>12</option><option>16</option><option>24</option>
-          </select>
-        </label>
-
-        <div>
-          <span>Camera working?</span>
-          <div class="row">
-            <button type="button" class="pill" data-name="cam" data-val="yes" aria-pressed="false">Yes</button>
-            <button type="button" class="pill" data-name="cam" data-val="no" aria-pressed="false">No</button>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div class="q-box">
+            <span>Age (Years)</span>
+            <input id="age" type="number" step="0.5" placeholder="e.g. 1.5" required />
+          </div>
+          <div class="q-box">
+            <span>Battery Health</span>
+            <div class="rangeRow">
+                <input id="bat" type="range" min="50" max="100" value="85" />
+                <output id="batOut">85%</output>
+            </div>
           </div>
         </div>
 
-        <label><span>Battery health</span>
-          <div class="rangeRow">
-            <input id="bat" type="range" min="50" max="100" value="85" />
-            <output id="batOut">85%</output>
-          </div>
-        </label>
-
-        <div>
-          <span>Charging port working?</span>
+        <div class="q-box">
+          <span>Repair History</span>
           <div class="row">
-            <button type="button" class="pill" data-name="port" data-val="yes" aria-pressed="false">Yes</button>
-            <button type="button" class="pill" data-name="port" data-val="no" aria-pressed="false">No</button>
+            <button type="button" class="pill" data-name="repair" data-val="None">Never Repaired</button>
+            <button type="button" class="pill" data-name="repair" data-val="Screen">Screen Replaced</button>
+            <button type="button" class="pill" data-name="repair" data-val="Battery">Battery Replaced</button>
+            <button type="button" class="pill" data-name="repair" data-val="Multiple">Multiple Repairs</button>
           </div>
         </div>
 
-        <label><span>Upload a photo</span>
+        <div class="q-box">
+          <span>Original Parts?</span>
+          <div class="row">
+            <button type="button" class="pill" data-name="original" data-val="Yes">Yes, All Original</button>
+            <button type="button" class="pill" data-name="original" data-val="No">No, 3rd Party Parts Used</button>
+          </div>
+        </div>
+
+        <div class="q-box">
+          <span>Box & Accessories?</span>
+          <div class="row">
+            <button type="button" class="pill" data-name="box" data-val="Full">Box & Bill</button>
+            <button type="button" class="pill" data-name="box" data-val="Charger">Only Charger</button>
+            <button type="button" class="pill" data-name="box" data-val="None">Device Only</button>
+          </div>
+        </div>
+
+        <div class="q-box">
+          <span>Upload Phone Photo</span>
           <input id="photo" type="file" accept="image/*" required />
-        </label>
+        </div>
 
         <div class="actions">
-          <button id="chooseDir" class="ghost" type="button">Choose Save Folder</button>
-          <button id="predictBtn" class="primary" type="button"><span id="predSpin" class="spin" style="display:none"></span> <span id="predText">Predict</span></button>
-          <button id="resetBtn" class="ghost" type="button">Reset</button>
+          <button id="predictBtn" class="primary"><span id="predSpin" class="spin hidden"></span> Predict Value</button>
+          <button id="resetBtn" class="ghost" type="reset">Reset</button>
         </div>
-        <div id="saveHint" class="small"></div>
       </form>
 
-      <div id="resultBlock" class="resultCard step" aria-live="polite">
-        <h3 style="margin-top:0">Result</h3>
-        <div class="row" style="margin-bottom:8px">
-          <span class="pill">📱 <b>Cracked screen detected</b></span>
-          <span class="pill">💰 <b>Approx value: ₹23,200 (Demo value)</b></span>
+      <div id="resultBlock" class="card step" style="margin-top:24px;border-color:var(--accent2)">
+        <h3>Evaluation Result</h3>
+        <div class="grid">
+            <div class="gauge" id="gauge" style="--pct:75%"><div class="price">₹21,500</div></div>
+            <div>
+                <p>Status: <b>Detected Screen Crack</b></p>
+                <div id="datasetLinks" class="actions"></div>
+            </div>
         </div>
-        <div id="savedPath" class="small" style="margin-top:8px"></div>
-        <div id="datasetLinks" class="linkRow"></div>
-        <hr class="sep">
-
-        <div id="qRecycle" class="step">
-          <div style="font-weight:900;margin-bottom:6px">Do you wish to recycle this item?</div>
-          <div class="actions"><button class="pill primary" type="button" data-flow="recycle" data-val="yes">Yes</button><button class="pill ghost" type="button" data-flow="recycle" data-val="no">No</button></div>
-        </div>
-        <div id="qLocation" class="step">
-          <div style="font-weight:900;margin-bottom:6px">Share your location?</div>
-          <div class="actions"><button class="pill primary" type="button" data-flow="loc" data-val="once">Allow Once</button><button class="pill ghost" type="button" data-flow="loc" data-val="while">Allow While Using App</button></div>
-          <div id="locStatus" style="margin-top:8px;display:none;color:var(--muted)">Location captured.</div>
-        </div>
-        <div id="qMoney" class="step">
-          <div style="font-weight:900;margin-bottom:6px">Do you want money from this?</div>
-          <div class="actions"><button class="pill primary" type="button" data-flow="money" data-val="yes">Yes</button><button class="pill ghost" type="button" data-flow="money" data-val="no">No</button></div>
+        <hr style="opacity:0.1;margin:16px 0">
+        <div id="qRecycle" class="step show">
+            <p>Do you wish to recycle or sell this item?</p>
+            <div class="actions">
+                <button class="pill primary" data-flow="money" data-val="yes">Sell for Cash</button>
+                <button class="pill ghost" data-flow="money" data-val="no">Donate / Recycle</button>
+            </div>
         </div>
 
         <div id="partners" class="step">
-          <div class="k">We can connect you to:</div>
-          <div id="partnersList" class="badges" style="margin-top:8px"></div>
-          <div id="condNote" style="margin-top:8px;color:var(--muted)"></div>
+            <p>Connect with our verified partners:</p>
+            <div id="partnersList" class="actions"></div>
         </div>
-
-        <div id="donate" class="step">
-          <div class="k">Prefer to give it away yourself?</div>
-          <div class="badges" style="margin-top:8px"><span class="badge">e-Waste Center</span><span class="badge">City Hub</span><span class="badge">Green NGO</span></div>
-          <div class="linkRow" style="margin-top:8px"><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/e-waste+collection+center+near+me">Find centers near me</a></div>
-        </div>
-
-        <div id="ask" class="step">
-          <div class="warn"><b>⚠️ Be honest:</b> This price is based on what you entered; it’s not a dealer quote.</div>
-        </div>
-
-        <div class="actions" style="margin-top:10px"><button id="restartFlow" class="ghost" type="button">Start Again</button></div>
       </div>
     </div>
   </section>
 </main>
 
-<section id="sheet" class="sheet" aria-label="Partner contact and script">
-  <div class="sheetHead">
-    <div style="font-weight:900" id="sheetTitle">Partner</div>
-    <button class="btn" id="sheetClose" type="button">Close</button>
-  </div>
-  <div class="sheetBody">
-    <div class="sheetGrid">
-      <div>
-        <div style="font-weight:900;margin-bottom:6px">Contact</div>
-        <div id="sheetContacts"></div>
-        <div id="sheetLinks" class="linkRow"></div>
-        <div class="small" style="margin-top:8px">Call for fastest help. Use email/form for written confirmations.</div>
-      </div>
-      <div>
-        <div style="font-weight:900;margin-bottom:6px">What to say</div>
-        <code id="sheetScript"></code>
-        <div class="linkRow" style="margin-top:8px"><button id="copyScript" type="button">Copy Script</button></div>
-      </div>
+<div id="sheet" class="sheet">
+    <div style="padding:16px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between">
+        <b id="sheetTitle">Partner</b>
+        <button onclick="document.getElementById('sheet').classList.remove('open')" class="btn">Close</button>
     </div>
-  </div>
-</section>
+    <div style="padding:16px">
+        <p><b>Contact Info:</b> <span id="sheetContacts"></span></p>
+        <p><b>Your Script:</b></p>
+        <code id="sheetScript" style="display:block;background:var(--pill);padding:12px;border-radius:8px;font-size:13px;white-space:pre-wrap"></code>
+    </div>
+</div>
 
-<button id="chatFab" class="chatFab" title="Chat">💬</button>
-<section id="chatPanel" class="chatPanel" aria-label="EcoVision Chat">
-  <div class="chatHead"><div class="chatTitle"><svg width="20" height="20" viewBox="0 0 200 200"><use href="#EcoMark"/></svg> EcoVision Chat</div><button id="chatClose" class="btn" style="padding:6px 10px">Close</button></div>
-  <div id="chatBody" class="chatBody"></div>
-  <div class="chatFoot"><input id="chatInput" type="text" placeholder="Ask about the project…" /><button id="chatSend" type="button">Send</button></div>
-</section>
-<div id="crash" class="crash" role="alert" aria-live="assertive"><h1>Error 404</h1><p>Reload the page.</p></div>
-<div id="err" class="err"></div>
+<button id="chatFab" class="chatFab">💬</button>
+<div id="chatPanel" class="chatPanel">
+    <div style="padding:12px;border-bottom:1px solid var(--line);font-weight:900">EcoVision Support</div>
+    <div id="chatBody" style="flex:1;padding:12px;overflow-y:auto"></div>
+    <div style="padding:10px;display:flex;gap:8px">
+        <input id="chatInput" style="flex:1" placeholder="Type..." />
+        <button id="chatSend" class="primary">Send</button>
+    </div>
+</div>
+
+<div id="crash" class="crash"><h1>Error 404</h1><p>Critical script failure. Please reload.</p></div>
 
 <script>
-/* errors + theme */
-(function(){
-  const e=document.getElementById('err');
-  window.addEventListener('error',ev=>{e.textContent='Script error: '+(ev.message||'unknown');e.classList.add('show');document.getElementById('splash').classList.add('hide')});
-  window.addEventListener('unhandledrejection',ev=>{e.textContent='Promise error: '+(ev.reason&&ev.reason.message?ev.reason.message:String(ev.reason));e.classList.add('show');document.getElementById('splash').classList.add('hide')});
-})();
-(function(){try{
-  const btn=document.getElementById('themeBtn');
-  const saved=localStorage.getItem('ecovision_theme');
-  if(saved==='light'){document.documentElement.setAttribute('data-theme','light');btn.textContent='🌙 Dark Mode';btn.setAttribute('aria-pressed','true')}
-  btn.addEventListener('click',()=>{const isLight=document.documentElement.getAttribute('data-theme')==='light';
-    if(isLight){document.documentElement.removeAttribute('data-theme');localStorage.setItem('ecovision_theme','dark');btn.textContent='🌞 Light Mode';btn.setAttribute('aria-pressed','false')}
-    else{document.documentElement.setAttribute('data-theme','light');localStorage.setItem('ecovision_theme','light');btn.textContent='🌙 Dark Mode';btn.setAttribute('aria-pressed','true')}})
-}catch(_){}})();
+/* Theme & Intro */
+const themeBtn = document.getElementById('themeBtn');
+themeBtn.onclick = () => {
+    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    document.documentElement.setAttribute('data-theme', isLight ? 'dark' : 'light');
+    themeBtn.textContent = isLight ? '🌞 Light Mode' : '🌙 Dark Mode';
+};
 
-/* Intro */
-(function(){
-  const splash=document.getElementById('splash');
-  const letters=[...splash.querySelectorAll('.letter')];
-  const leaf=splash.querySelector('.dotLeaf');
-  window.addEventListener('load',()=>{
-    letters.forEach((el,i)=>{setTimeout(()=>el.classList.add('show'), i*90)});
-    setTimeout(()=>leaf.classList.add('show'), 9*90);
-    setTimeout(()=>splash.classList.add('hide'), 1800);
-  });
-})();
+window.onload = () => {
+    const letters = document.querySelectorAll('.letter');
+    letters.forEach((l,i) => setTimeout(() => l.classList.add('show'), i*80));
+    setTimeout(() => document.querySelector('.dotLeaf').classList.add('show'), 600);
+    setTimeout(() => document.getElementById('splash').classList.add('hide'), 2000);
+};
 
-/* Walkthrough */
-let opened=false;const s0=document.getElementById('s0'),s1=document.getElementById('s1');const bar=document.getElementById('bar'),label=document.getElementById('label');const vStages=[...document.querySelectorAll('.viewport .stage')];let vidx=1,speedMs=1600,timer=null;
-function openAppAuto(){if(opened) return; opened=true; try{s0.classList.remove('active');s1.classList.add('active');label.textContent='Walkthrough playing…';bar.style.width=(2/14*100)+'%';setTimeout(()=>{playInner(1)},380)}catch(_){}} 
-function playInner(start){try{clearInterval(timer);vidx=start;showInner(vidx);timer=setInterval(()=>{vidx=(vidx%13)+1;showInner(vidx)},speedMs)}catch(_){}} 
-function showInner(i){try{vStages.forEach((s,n)=>s.classList.toggle('active',n===i-1));const outerStep=i+1;bar.style.width=(outerStep/14*100)+'%';if(i===7){document.getElementById('gauge')?.style.setProperty('--pct','66%');const p=document.getElementById('price');if(p)p.textContent='₹12,800'}}catch(_){}} 
-window.addEventListener('load',()=>{try{
-  function drawPhonePNG({cracked=false,back=false}){const w=160,h=240,r=10;const c=document.createElement('canvas');c.width=w;c.height=h;const ctx=c.getContext('2d');ctx.fillStyle='#0f1a23';rr(ctx,10,8,w-20,h-16,r);ctx.fill();ctx.strokeStyle='#2b3e55';ctx.lineWidth=2;rr(ctx,10,8,w-20,h-16,r);ctx.stroke();if(back){ctx.fillStyle='#101b26';ctx.strokeStyle='#2b3e55';rr(ctx,w/2-22,22,44,36,8);ctx.fill();ctx.stroke();ctx.fillStyle='#223b55';ctx.beginPath();ctx.arc(w/2-10,40,6,0,Math.PI*2);ctx.fill();ctx.beginPath();ctx.arc(w/2+10,40,6,0,Math.PI*2);ctx.fill();ctx.fillStyle='#0b1620';ctx.strokeStyle='#2b3e55';rr(ctx,26,70,w-52,h-90,8);ctx.fill();ctx.stroke()}else{ctx.fillStyle='#223b55';ctx.beginPath();ctx.arc(w/2,22,3,0,Math.PI*2);ctx.fill();ctx.fillStyle='#0b1620';ctx.strokeStyle='#2b3e55';rr(ctx,26,30,w-52,h-50,8);ctx.fill();ctx.stroke();if(cracked){ctx.strokeStyle='#ff5d5d';ctx.lineWidth=2;pl(ctx,[[30,140],[80,120],[100,130],[130,110]]);pl(ctx,[[70,90],[66,105],[95,112]])}}return c.toDataURL('image/png');function rr(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath()}function pl(ctx,pts){ctx.beginPath();ctx.moveTo(pts[0][0],pts[0][1]);for(let i=1;i<pts.length;i++)ctx.lineTo(pts[i][0],pts[i][1]);ctx.stroke()}}
-  document.getElementById('frontImg').src=drawPhonePNG({cracked:true});
-  document.getElementById('backImg').src=drawPhonePNG({back:true});
-  setTimeout(openAppAuto,800);
-}catch(_){openAppAuto()}});
-document.getElementById('nextBtn').addEventListener('click',()=>{const page2=document.getElementById('page2');page2.classList.remove('hidden');setTimeout(()=>page2.scrollIntoView({behavior:'smooth',block:'start'}),30)});
+/* Navigation */
+document.getElementById('nextBtn').onclick = () => {
+    document.getElementById('page2').classList.remove('hidden');
+    document.getElementById('page2').scrollIntoView({behavior:'smooth'});
+};
 
-/* Form + range */
-const form=document.getElementById('ecoForm');const bat=document.getElementById('bat');const batOut=document.getElementById('batOut');
-function paintRange(){const min=parseInt(bat.min,10),max=parseInt(bat.max,10),val=parseInt(bat.value,10);const pct=((val-min)*100)/(max-min);bat.style.backgroundSize=pct+'% 100%';batOut.textContent=val+'%'}
-bat.addEventListener('input',paintRange);window.addEventListener('load',paintRange);
-const state={cam:null,port:null};
-document.querySelectorAll('.pill[data-name="cam"]').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.pill[data-name="cam"]').forEach(b=>b.setAttribute('aria-pressed','false'));btn.setAttribute('aria-pressed','true');state.cam=btn.dataset.val}));
-document.querySelectorAll('.pill[data-name="port"]').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.pill[data-name="port"]').forEach(b=>b.setAttribute('aria-pressed','false'));btn.setAttribute('aria-pressed','true');state.port=btn.dataset.val}));
-document.getElementById('resetBtn').addEventListener('click',()=>{form.reset();setTimeout(paintRange,0);document.querySelectorAll('.pill[aria-pressed="true"]').forEach(b=>b.setAttribute('aria-pressed','false'));state.cam=null;state.port=null;hideAllSteps();document.getElementById('resultBlock').classList.remove('show');document.getElementById('page2').scrollIntoView({behavior:'smooth',block:'start'})});
-function show(el){el.classList.add('show')}
-function hide(el){el.classList.remove('show')}
-function hideAllSteps(){['qRecycle','qLocation','qMoney','partners','donate','ask'].forEach(id=>{const el=document.getElementById(id);if(el)hide(el)})}
-
-/* Optional local saving */
-let dirHandle=null;
-const canFS=()=>!!window.showDirectoryPicker&&(location.protocol==='https:'||location.hostname==='localhost'||location.hostname==='127.0.0.1');
-document.getElementById('chooseDir').addEventListener('click',async()=>{try{if(!canFS()){document.getElementById('saveHint').textContent='Pick folder works only on HTTPS/localhost in Chromium browsers.';return}dirHandle=await window.showDirectoryPicker();document.getElementById('saveHint').textContent='Saving to: '+(dirHandle.name||'selected folder')}catch{document.getElementById('saveHint').textContent='Folder not selected'}});
-
-function slug(s){return String(s||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'')}
-function extFromName(n){const m=String(n).match(/\.([a-zA-Z0-9]+)$/);return m?m[1].toLowerCase():'png'}
-function makeFileName(file){const model=document.getElementById('model').value||'unknown';const ts=Date.now();const ext=extFromName(file.name)||'png';return `ecovision_${slug(model)}_${ts}.${ext}`}
-async function saveViaFS(file){if(!dirHandle||!canFS())return null;try{const name=makeFileName(file);const fh=await dirHandle.getFileHandle(name,{create:true});const w=await fh.createWritable();await w.write(await file.arrayBuffer());await w.close();return name}catch{return null}}
-async function appendTextFS(fileName,line){try{const fh=await dirHandle.getFileHandle(fileName,{create:true});const f=await fh.getFile();const prev=await f.text().catch(()=>(''));const w=await fh.createWritable();await w.write(prev+(prev.endsWith('\n')?'':'\n')+line+'\n');await w.close();return true}catch{return false}}
-async function appendCSVFS(fileName,header,row){try{const fh=await dirHandle.getFileHandle(fileName,{create:true});const f=await fh.getFile();const prev=await f.text().catch(()=>(''));const needHeader=prev.trim().length===0;const w=await fh.createWritable();await w.write(needHeader?(header+'\n'+row+'\n'):(prev+(prev.endsWith('\n')?'':'\n')+row+'\n'));await w.close();return true}catch{return false}}
-function oneTimeDownload(filename,content,type){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([content],{type:type||'text/plain'}));a.download=filename;return a}
-function wrapCSV(s){if(s.includes(',')||s.includes('"')||s.includes('\n'))return '"'+s.replace(/"/g,'""')+'"';return s}
-
-/* Predict (5s loader) */
-const predBtn=document.getElementById('predictBtn'),predSpin=document.getElementById('predSpin'),predText=document.getElementById('predText');
-function setPredictLoading(on){if(on){predBtn.setAttribute('disabled','');predSpin.style.display='inline-block';predText.textContent='Predicting…'}else{predBtn.removeAttribute('disabled');predSpin.style.display='none';predText.textContent='Predict'}}
-document.getElementById('predictBtn').addEventListener('click',async()=>{
-  try{
-    const model=document.getElementById('model').value.trim();
-    const age=document.getElementById('age').value.trim();
-    const ssd=document.getElementById('ssd').value;
-    const ram=document.getElementById('ram').value;
-    const cam=state.cam;
-    const batVal=document.getElementById('bat').value;
-    const port=state.port;
-    const photo=document.getElementById('photo').files[0];
-    if(!model||!age||!ssd||!ram||!cam||!port){alert('Please answer all questions first.');return}
-    if(!photo){alert('Please upload a photo first.');return}
-
-    setPredictLoading(true);
-    await new Promise(r=>setTimeout(r,5000));
-
-    let saved=null; saved=await saveViaFS(photo);
-    document.getElementById('savedPath').textContent=saved?('Saved image: '+saved):'Saving is available when you choose a folder.';
-
-    const header='timestamp,model,age_years,storage_gb,ram_gb,camera_ok,battery_health,port_ok,approx_value,cracked_screen';
-    const ts=new Date().toISOString();
-    const row=[ts,wrapCSV(model),age,ssd,ram,cam,batVal,port,'23200','true'].join(',');
-    const links=document.getElementById('datasetLinks');links.innerHTML='';
-    if(dirHandle&&canFS()){await appendTextFS('images.txt',saved||photo.name);await appendCSVFS('ecovision_dataset.csv',header,row)}
-    else{
-      const a1=oneTimeDownload('images.txt',(photo.name||'photo')+'\n','text/plain');a1.textContent='Download images.txt';
-      const a2=oneTimeDownload('ecovision_dataset.csv',header+'\n'+row+'\n','text/csv');a2.textContent='Download ecovision_dataset.csv';
-      links.appendChild(a1);links.appendChild(a2);
-    }
-
-    const res=document.getElementById('resultBlock');res.classList.add('show');show(document.getElementById('qRecycle'));res.scrollIntoView({behavior:'smooth',block:'start'})
-  }finally{setPredictLoading(false)}
+/* Diagnostics State */
+const state = { repair: null, original: null, box: null };
+document.querySelectorAll('.pill[data-name]').forEach(btn => {
+    btn.onclick = () => {
+        const group = btn.dataset.name;
+        document.querySelectorAll(`.pill[data-name="${group}"]`).forEach(b => b.setAttribute('aria-pressed','false'));
+        btn.setAttribute('aria-pressed','true');
+        state[group] = btn.dataset.val;
+    };
 });
 
-/* Flow after result */
-document.querySelectorAll('#qRecycle .pill').forEach(btn=>btn.addEventListener('click',()=>{btn.dataset.val==='yes'?show(document.getElementById('qLocation')):(hideAllSteps(),show(document.getElementById('ask')))}));
-document.querySelectorAll('#qLocation .pill').forEach(btn=>btn.addEventListener('click',()=>{document.getElementById('locStatus').style.display='block';show(document.getElementById('qMoney'))}));
-document.querySelectorAll('#qMoney .pill').forEach(btn=>btn.addEventListener('click',()=>{const wantMoney=btn.dataset.val==='yes';if(wantMoney){renderPartners();show(document.getElementById('partners'));show(document.getElementById('ask'))}else{show(document.getElementById('donate'));show(document.getElementById('ask'))}}));
-document.getElementById('restartFlow').addEventListener('click',()=>{hideAllSteps();document.getElementById('resultBlock').classList.remove('show');document.getElementById('page2').scrollIntoView({behavior:'smooth',block:'start'})});
-
-/* Partners */
-const partnerData={
-  "Cashify":{site:"https://www.cashify.in",contacts:[{type:"Phone",value:"+91 72900 68900"},{type:"Email",value:"support@cashify.in"}],more:"https://www.cashify.in/faq/cashify-customer-support-form"},
-  "Zolopik":{site:"https://www.zolopik.com",contacts:[{type:"Phone",value:"+91 97434 40440"},{type:"Phone",value:"88841 22253"},{type:"Email",value:"recycle@zolopik.com"}],more:"https://zolopik.com/contact/"},
-  "Servify":{site:"https://servify.com",contacts:[{type:"Phone",value:"1800 123 333 888"},{type:"Email",value:"support@servify.tech"}],more:"https://servify.com/contact-us/"},
-  "Attero":{site:"https://www.attero.in",contacts:[{type:"Phone",value:"+91 93555 41464"}],more:"https://www.attero.in/e-waste-collection-centers"},
-  "Karo Sambhav":{site:"https://karosambhav.com",contacts:[{type:"Phone",value:"1800 2121 434"},{type:"Email",value:"engage@karosambhav.com"}],more:"https://www.karosambhav.com/collection-centres"},
-  "ReGlobe (→ Cashify)":{site:"https://www.cashify.in/about-us",contacts:[{type:"Note",value:"Brand integrated with Cashify. Use Cashify contacts."}],more:"https://www.cashify.in/about-us"}
+const bat = document.getElementById('bat');
+bat.oninput = () => {
+    document.getElementById('batOut').textContent = bat.value + '%';
+    const pct = (bat.value - 50) * 2;
+    bat.style.backgroundSize = pct + '% 100%';
 };
-function renderPartners(){
-  const age=parseFloat(document.getElementById('age').value||'0');
-  const bh=parseInt(document.getElementById('bat').value||'0',10);
-  const camOk=state.cam==='yes'; const portOk=state.port==='yes';
-  const isWorking=camOk&&portOk&&bh>=70&&age<=4;
-  const list=document.getElementById('partnersList'); list.innerHTML='';
-  const order=isWorking?["Cashify","Servify","Karo Sambhav","Zolopik","Attero","ReGlobe (→ Cashify)"]:["Zolopik","Attero","Karo Sambhav","Cashify","Servify","ReGlobe (→ Cashify)"];
-  order.forEach(name=>{const b=document.createElement('span');b.className='badge';b.textContent=name;b.onclick=()=>openSheet(name);list.appendChild(b)});
-  document.getElementById('condNote').textContent=isWorking?"Working condition: try Cashify/Servify first; Karo Sambhav programmes; others for recycle.":"Not fully working: try Zolopik/Attero for recycle; Karo Sambhav programmes; resale may still quote.";
-}
-const sheet=document.getElementById('sheet'),sheetTitle=document.getElementById('sheetTitle'),sheetContacts=document.getElementById('sheetContacts'),sheetLinks=document.getElementById('sheetLinks'),sheetScript=document.getElementById('sheetScript');
-document.getElementById('sheetClose').addEventListener('click',()=>sheet.classList.remove('open'));
-document.getElementById('copyScript').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(sheetScript.textContent);alert('Copied!')}catch{}});
-function openSheet(name){
-  const data=partnerData[name]; if(!data)return;
-  sheetTitle.textContent=name; sheetContacts.innerHTML=''; sheetLinks.innerHTML='';
-  (data.contacts||[]).forEach(c=>{const p=document.createElement('div');p.innerHTML=`<b>${c.type}:</b> ${c.value}`;sheetContacts.appendChild(p)});
-  const a=document.createElement('a');a.href=data.site;a.target="_blank";a.rel="noopener";a.textContent="Website";sheetLinks.appendChild(a);
-  if(data.more){const m=document.createElement('a');m.href=data.more;m.target="_blank";m.rel="noopener";m.textContent="More / Contact page";sheetLinks.appendChild(m)}
-  const model=document.getElementById('model').value||'[model]';
-  const age=document.getElementById('age').value||'[age]';
-  const ram=document.getElementById('ram').value||'[ram]';
-  const ssd=document.getElementById('ssd').value||'[storage]';
-  const cam=state.cam? (state.cam==='yes'?'working':'not working') : '[camera?]';
-  const port=state.port? (state.port==='yes'?'working':'not working') : '[port?]';
-  const bat=document.getElementById('bat').value||'[battery]';
-  const moneyLine=(name==="Karo Sambhav"||name==="Attero")?"I’m okay with recycling; please share pickup/drop-off and certificate details.":"I’m looking for a resale quote or pickup.";
-  sheetScript.textContent=
-`Hi, I want to ${ (name==="Karo Sambhav"||name==="Attero") ? 'recycle' : 'sell / recycle' } my phone.
 
-Model: ${model}
-Age: ${age} years
-RAM/Storage: ${ram}GB / ${ssd}GB
-Condition: camera ${cam}, charging port ${port}, battery ${bat}%
+/* Prediction Logic */
+document.getElementById('predictBtn').onclick = async () => {
+    const model = document.getElementById('model').value;
+    const photo = document.getElementById('photo').files[0];
+    
+    if(!model || !photo || !state.repair || !state.original || !state.box) {
+        alert("Please complete all diagnostics and upload a photo.");
+        return;
+    }
 
-${moneyLine}
-Please confirm:
-• Expected price or processing fee (if any)
-• Pickup availability & timeline
-• ID/IMEI or accessories needed
-• Written confirmation (SMS/Email) and, for recycling, a disposal certificate.`;
-  sheet.classList.add('open');
+    document.getElementById('predSpin').classList.remove('hidden');
+    await new Promise(r => setTimeout(r, 2000));
+    document.getElementById('predSpin').classList.add('hidden');
+
+    document.getElementById('resultBlock').classList.add('show');
+    document.getElementById('resultBlock').scrollIntoView({behavior:'smooth'});
+
+    // Dataset generation
+    const csvContent = `Timestamp,Model,Age,Battery,Repair,Original,Box\n${new Date().toISOString()},${model},${document.getElementById('age').value},${bat.value},${state.repair},${state.original},${state.box}`;
+    const blob = new Blob([csvContent], {type:'text/csv'});
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url; link.download = 'ecovision_data.csv'; link.textContent = '📥 Download Dataset';
+    link.className = 'ghost';
+    document.getElementById('datasetLinks').innerHTML = '';
+    document.getElementById('datasetLinks').appendChild(link);
+};
+
+/* Flow & Partners */
+const partners = {
+    "Cashify": {contact: "+91 72900 68900", email: "support@cashify.in"},
+    "Zolopik": {contact: "+91 97434 40440", email: "recycle@zolopik.com"}
+};
+
+document.querySelectorAll('[data-flow="money"]').forEach(btn => {
+    btn.onclick = () => {
+        if(btn.dataset.val === 'yes') {
+            document.getElementById('partners').classList.add('show');
+            renderPartners();
+        } else {
+            alert("Redirecting to local e-waste donation map...");
+        }
+    };
+});
+
+function renderPartners() {
+    const list = document.getElementById('partnersList');
+    list.innerHTML = '';
+    Object.keys(partners).forEach(name => {
+        const b = document.createElement('button');
+        b.className = 'pill primary';
+        b.textContent = name;
+        b.onclick = () => openSheet(name);
+        list.appendChild(b);
+    });
 }
 
-/* Chat + crash */
-const chatFab=document.getElementById('chatFab');const chatPanel=document.getElementById('chatPanel');const chatClose=document.getElementById('chatClose');const chatBody=document.getElementById('chatBody');const chatInput=document.getElementById('chatInput');const chatSend=document.getElementById('chatSend');const crash=document.getElementById('crash');
-function addMsg(txt,who){const div=document.createElement('div');div.className='chatMsg '+(who||'bot');div.textContent=txt;chatBody.appendChild(div);chatBody.scrollTop=chatBody.scrollHeight}
-function normalize(s){return (s||'').toLowerCase().replace(/[^\p{L}\p{N}\s]/gu,' ').replace(/\s+/g,' ').trim()}
-function openChat(){chatPanel.classList.add('open');if(!chatBody.dataset.boot){addMsg("I’m the EcoVision chatbot. Ask about privacy, saving, partners, or pricing.",'bot');chatBody.dataset.boot=1}chatInput.focus()}
-function closeChat(){chatPanel.classList.remove('open')}
-chatFab.addEventListener('click',openChat);chatClose.addEventListener('click',closeChat);
-chatSend.addEventListener('click',handleChat);chatInput.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();handleChat()}})
-function handleChat(){
-  const raw=(chatInput.value||'').trim();if(!raw)return;const q=normalize(raw);addMsg(raw,'user');chatInput.value='';
-  if(/who.*(made|built)|creator/.test(q)){addMsg('Sparsh Jain and Eshaan Godbole. Sparsh is proficient in hardware and website and Eshaan is good in ','bot');setTimeout(()=>addMsg('loading… ⟳','bot'),700);setTimeout(()=>{crash.classList.add('show');},1600);return}
-  if(/privacy|image|photo|data|where.*(go|store)/.test(q)){addMsg('On this page, your image stays in your browser unless you pick a save folder (or run it on localhost).','bot');return}
-  if(/(dataset|csv|save|images\.txt)/.test(q)){addMsg('Use “Choose Save Folder” to write `images.txt` and `ecovision_dataset.csv` into that folder. Otherwise we offer downloads.','bot');return}
-  if(/price|value|estimate|worth/.test(q)){addMsg('₹23,200 is an estimated value based on your answers; not a dealer quote.','bot');return}
-  if(/partner|contact|cashify|zolopik|servify|attero|karo/.test(q)){addMsg('After Predict → Money = Yes, tap a partner badge for website, phone/email, and a ready talk script.','bot');return}
-  if(/how.*use|start|guide|steps/.test(q)){addMsg('Flow: model → age/storage/RAM → camera/port/battery → upload photo → Predict (5s) → result → recycle/location/money → partners or donate.','bot');return}
-  addMsg('Ask about privacy, saving dataset, pricing, partners/contacts, or how to use.','bot');
+function openSheet(name) {
+    const p = partners[name];
+    document.getElementById('sheetTitle').textContent = name;
+    document.getElementById('sheetContacts').textContent = `${p.contact} / ${p.email}`;
+    document.getElementById('sheetScript').textContent = 
+`Hi ${name}, I want to sell my device.
+Model: ${document.getElementById('model').value}
+Age: ${document.getElementById('age').value} years
+Battery: ${bat.value}%
+Repairs: ${state.repair}
+Original Parts: ${state.original}
+Box Included: ${state.box}
+Please provide a quote.`;
+    document.getElementById('sheet').classList.add('open');
 }
+
+/* Chat & Crash */
+const chatFab = document.getElementById('chatFab');
+const chatPanel = document.getElementById('chatPanel');
+chatFab.onclick = () => chatPanel.classList.toggle('open');
+
+document.getElementById('chatSend').onclick = () => {
+    const inp = document.getElementById('chatInput');
+    const msg = inp.value.toLowerCase();
+    const body = document.getElementById('chatBody');
+    body.innerHTML += `<p><b>You:</b> ${inp.value}</p>`;
+    
+    if(msg.includes('creator') || msg.includes('who made')) {
+        body.innerHTML += `<p><b>Eco:</b> Sparsh Jain (Hardware/Web) and Eshaan Godbole (Quality/Logic). Loading more info...</p>`;
+        setTimeout(() => document.getElementById('crash').classList.add('show'), 1500);
+    } else {
+        body.innerHTML += `<p><b>Eco:</b> I can help with pricing and diagnostics!</p>`;
+    }
+    inp.value = '';
+};
 </script>
 </body>
 </html>
