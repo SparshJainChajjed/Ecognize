@@ -324,11 +324,10 @@ input[type=range]::-moz-range-track{background:transparent}
         </div>
 
         <div>
-          <span>Repair history?</span>
+          <span>Any repairs done?</span>
           <div class="row">
-            <button type="button" class="pill" data-name="repair_history" data-val="none" aria-pressed="false">No repairs</button>
-            <button type="button" class="pill" data-name="repair_history" data-val="screen" aria-pressed="false">Screen replaced</button>
-            <button type="button" class="pill" data-name="repair_history" data-val="multiple" aria-pressed="false">Multiple repairs</button>
+            <button type="button" class="pill" data-name="repair_history" data-val="yes" aria-pressed="false">Yes</button>
+            <button type="button" class="pill" data-name="repair_history" data-val="no" aria-pressed="false">No</button>
           </div>
         </div>
 
@@ -343,9 +342,8 @@ input[type=range]::-moz-range-track{background:transparent}
         <div>
           <span>Box & Accessories included?</span>
           <div class="row">
-            <button type="button" class="pill" data-name="box_accessories" data-val="full" aria-pressed="false">Full set</button>
-            <button type="button" class="pill" data-name="box_accessories" data-val="charger" aria-pressed="false">Only Charger</button>
-            <button type="button" class="pill" data-name="box_accessories" data-val="none" aria-pressed="false">None</button>
+            <button type="button" class="pill" data-name="box_accessories" data-val="yes" aria-pressed="false">Yes</button>
+            <button type="button" class="pill" data-name="box_accessories" data-val="no" aria-pressed="false">No</button>
           </div>
         </div>
 
@@ -588,9 +586,9 @@ function openSheet(name){
   const cam=state.cam? (state.cam==='yes'?'working':'not working') : '[camera?]';
   const port=state.port? (state.port==='yes'?'working':'not working') : '[port?]';
   const bat=document.getElementById('bat').value||'[battery]';
-  const repair=state.repair_history||'[repair]';
+  const repair=state.repair_history==='yes'?'Yes':'No';
   const parts=state.original_parts==='yes'?'Yes':'No';
-  const acc=state.box_accessories||'[acc]';
+  const acc=state.box_accessories==='yes'?'Yes':'No';
   const moneyLine=(name==="Karo Sambhav"||name==="Attero")?"I’m okay with recycling; please share pickup/drop-off and certificate details.":"I’m looking for a resale quote or pickup.";
   sheetScript.textContent=
 `Hi, I want to ${ (name==="Karo Sambhav"||name==="Attero") ? 'recycle' : 'sell / recycle' } my phone.
@@ -599,8 +597,8 @@ Model: ${model}
 Age: ${age} years
 RAM/Storage: ${ram}GB / ${ssd}GB
 Condition: camera ${cam}, charging port ${port}, battery ${bat}%
-History: repair status: ${repair}, original parts: ${parts}
-Accessories: ${acc}
+History: any repairs: ${repair}, original parts: ${parts}
+Accessories: Box & Accessories: ${acc}
 
 ${moneyLine}
 Please confirm:
