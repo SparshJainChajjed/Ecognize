@@ -177,31 +177,85 @@ input[type=range]::-moz-range-track{background:transparent}
       <div class="tag">Check value • Sell or Recycle • Do good</div>
     </div>
   </div>
-  <div class="actions-right">
+  <div class="actions-right" style="display:flex; align-items:center;">
+    <button id="globalBackBtn" class="btn hidden" style="margin-right:8px">← Back</button>
     <button id="themeBtn" class="btn" aria-pressed="false" title="Switch theme">🌞 Light Mode</button>
   </div>
 </header>
 
 <main class="wrap">
 
-  <section id="page0" class="card">
+  <section id="page1_ewaste" class="card">
     <div class="grid">
       <div>
-        <h2>Recycle your E-waste</h2>
-        <p>Responsibly dispose of your old electronics, or check your smartphone's value to get paid or recycle it.</p>
+        <h2>Recycle E-Waste responsibly</h2>
+        <p>Upload a photo of your old electronics, and we'll help you find the best recycling or donation options in minutes.</p>
         <ul class="clean">
-          <li>✅ Fast estimate for visible damage.</li>
-          <li>🔒 Photo stays in your browser on this page.</li>
-          <li>🤝 Cash partners or donation centers.</li>
+          <li>✅ Instant item recognition.</li>
+          <li>🔒 Privacy focused local processing.</li>
+          <li>🤝 Direct connection to certified e-waste centers.</li>
         </ul>
-        <div class="actions" style="margin-top:20px">
-          <button id="btnRecycleOnly" class="primary" type="button">Recycle E-Waste</button>
-          <button id="btnPhonePage" class="ghost" type="button">Check Phone Value</button>
+        <div class="progress" aria-hidden="true" style="margin-top:16px"><div class="bar" id="bar_e"></div></div>
+        <div class="label" id="label_e">Walkthrough playing…</div>
+        <div class="actions" style="margin-top:10px">
+          <button id="nextBtn_e" class="primary" type="button">Next →</button>
+          <button id="switchPhoneBtn" class="ghost" type="button">Check Phone Value</button>
         </div>
       </div>
+
       <div>
-        <div style="display:flex; justify-content:center; align-items:center; min-height:240px">
-          <svg width="180" height="180" viewBox="0 0 200 200"><use href="#EcoMark"/></svg>
+        <div class="phone" aria-label="EcoVision E-Waste walkthrough">
+          <div class="screen">
+            <div class="stage active" id="s0_e">
+              <div class="drawer">
+                <div class="search">🔎 Search apps</div>
+                <div class="grid">
+                  <div class="appicon"><span>Camera</span></div>
+                  <div class="appicon"><span>Mail</span></div>
+                  <div class="appicon"><span>Maps</span></div>
+                  <div class="appicon"><span>Music</span></div>
+                  <div class="appicon eco"><span>EcoVision</span></div>
+                  <div class="appicon"><span>Chat</span></div>
+                  <div class="appicon"><span>Files</span></div>
+                  <div class="appicon"><span>Calendar</span></div>
+                  <div class="appicon"><span>Browser</span></div>
+                  <div class="appicon"><span>Gallery</span></div>
+                </div>
+                <div class="pager"><div class="dot active"></div><div class="dot"></div><div class="dot"></div></div>
+                <div class="dock"><div class="dockicon">📞</div><div class="dockicon">💬</div><div class="dockicon">🌐</div><div class="dockicon">📷</div></div>
+              </div>
+            </div>
+
+            <div class="stage" id="s1_e">
+              <div class="appframe">
+                <div class="statusbar"><div>09:41</div><div>📶 📡 🔋 87%</div></div>
+                <div class="appbar"><div style="font-weight:900">EcoVision</div></div>
+                <div class="viewport" id="viewport_e">
+                  <div class="stage active" id="v1_e">
+                    <div class="ui" style="text-align:center">
+                      <div style="font-size:18px;font-weight:900;margin-bottom:6px">EcoVision</div>
+                      <div style="width:28px;height:28px;border-radius:50%;border:3px solid rgba(255,255,255,.2);border-top-color:var(--accent2);margin:8px auto;animation:spin 1s linear infinite"></div>
+                      <div style="font-size:12px;color:#8ea1b8">Starting E-Waste Scan…</div>
+                    </div>
+                  </div>
+                  <div class="stage" id="v2_e">
+                    <div class="ui">
+                      <div style="display:flex;justify-content:space-between;align-items:center"><b>Upload E-Waste photo</b><span class="pill" aria-pressed="false">Top & Bottom</span></div>
+                      <div class="preview" style="margin-top:10px">
+                        <div class="ph"><img id="ewasteImg1" alt="E-waste item" /></div>
+                        <div class="ph"><img id="ewasteImg2" alt="E-waste item 2" /></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="stage" id="v3_e"><div class="photoWrap"><div class="hot orange" style="width:100px;height:80px;left:25%;top:30%"></div></div></div>
+                  <div class="stage" id="v4_e"><div class="ui"><div class="k">Item Identified</div><div class="v">Generic Wireless Router</div></div></div>
+                  <div class="stage" id="v5_e"><div class="ui" style="text-align:center"><div style="font-weight:900">Recycle this item?</div><div class="row" style="margin-top:8px"><span class="pill">No</span><span class="pill">Yes</span></div></div></div>
+                  <div class="stage" id="v6_e"><div class="ui" style="text-align:center"><div class="k">Prefer to give it away yourself?</div><div class="badges" style="margin-top:8px"><span class="badge">e-Waste Center</span><span class="badge">City Hub</span><span class="badge">Green NGO</span></div></div></div>
+                </div>
+                <div class="navbar" style="border-top:1px solid var(--line);padding:8px 0;text-align:center;color:#cfe7ff">EcoVision</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -219,7 +273,10 @@ input[type=range]::-moz-range-track{background:transparent}
         </ul>
         <div class="progress" aria-hidden="true" style="margin-top:16px"><div class="bar" id="bar"></div></div>
         <div class="label" id="label">Walkthrough playing…</div>
-        <div style="margin-top:10px"><button id="nextBtn" class="primary" type="button">Next →</button></div>
+        <div class="actions" style="margin-top:10px">
+          <button id="nextBtn" class="primary" type="button">Next →</button>
+          <button id="switchEwasteBtn" class="ghost" type="button">Recycle E-Waste</button>
+        </div>
       </div>
 
       <div>
@@ -428,79 +485,6 @@ input[type=range]::-moz-range-track{background:transparent}
     </div>
   </section>
 
-  <section id="page1_ewaste" class="card hidden">
-    <div class="grid">
-      <div>
-        <h2>Recycle E-Waste responsibly</h2>
-        <p>Upload a photo of your old electronics, and we'll help you find the best recycling or donation options in minutes.</p>
-        <ul class="clean">
-          <li>✅ Instant item recognition.</li>
-          <li>🔒 Privacy focused local processing.</li>
-          <li>🤝 Direct connection to certified e-waste centers.</li>
-        </ul>
-        <div class="progress" aria-hidden="true" style="margin-top:16px"><div class="bar" id="bar_e"></div></div>
-        <div class="label" id="label_e">Walkthrough playing…</div>
-        <div style="margin-top:10px"><button id="nextBtn_e" class="primary" type="button">Next →</button></div>
-      </div>
-
-      <div>
-        <div class="phone" aria-label="EcoVision E-Waste walkthrough">
-          <div class="screen">
-            <div class="stage active" id="s0_e">
-              <div class="drawer">
-                <div class="search">🔎 Search apps</div>
-                <div class="grid">
-                  <div class="appicon"><span>Camera</span></div>
-                  <div class="appicon"><span>Mail</span></div>
-                  <div class="appicon"><span>Maps</span></div>
-                  <div class="appicon"><span>Music</span></div>
-                  <div class="appicon eco"><span>EcoVision</span></div>
-                  <div class="appicon"><span>Chat</span></div>
-                  <div class="appicon"><span>Files</span></div>
-                  <div class="appicon"><span>Calendar</span></div>
-                  <div class="appicon"><span>Browser</span></div>
-                  <div class="appicon"><span>Gallery</span></div>
-                </div>
-                <div class="pager"><div class="dot active"></div><div class="dot"></div><div class="dot"></div></div>
-                <div class="dock"><div class="dockicon">📞</div><div class="dockicon">💬</div><div class="dockicon">🌐</div><div class="dockicon">📷</div></div>
-              </div>
-            </div>
-
-            <div class="stage" id="s1_e">
-              <div class="appframe">
-                <div class="statusbar"><div>09:41</div><div>📶 📡 🔋 87%</div></div>
-                <div class="appbar"><div style="font-weight:900">EcoVision</div></div>
-                <div class="viewport" id="viewport_e">
-                  <div class="stage active" id="v1_e">
-                    <div class="ui" style="text-align:center">
-                      <div style="font-size:18px;font-weight:900;margin-bottom:6px">EcoVision</div>
-                      <div style="width:28px;height:28px;border-radius:50%;border:3px solid rgba(255,255,255,.2);border-top-color:var(--accent2);margin:8px auto;animation:spin 1s linear infinite"></div>
-                      <div style="font-size:12px;color:#8ea1b8">Starting E-Waste Scan…</div>
-                    </div>
-                  </div>
-                  <div class="stage" id="v2_e">
-                    <div class="ui">
-                      <div style="display:flex;justify-content:space-between;align-items:center"><b>Upload E-Waste photo</b><span class="pill" aria-pressed="false">Top & Bottom</span></div>
-                      <div class="preview" style="margin-top:10px">
-                        <div class="ph"><img id="ewasteImg1" alt="E-waste item" /></div>
-                        <div class="ph"><img id="ewasteImg2" alt="E-waste item 2" /></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="stage" id="v3_e"><div class="photoWrap"><div class="hot orange" style="width:100px;height:80px;left:25%;top:30%"></div></div></div>
-                  <div class="stage" id="v4_e"><div class="ui"><div class="k">Item Identified</div><div class="v">Generic Wireless Router</div></div></div>
-                  <div class="stage" id="v5_e"><div class="ui" style="text-align:center"><div style="font-weight:900">Recycle this item?</div><div class="row" style="margin-top:8px"><span class="pill">No</span><span class="pill">Yes</span></div></div></div>
-                  <div class="stage" id="v6_e"><div class="ui" style="text-align:center"><div class="k">Prefer to give it away yourself?</div><div class="badges" style="margin-top:8px"><span class="badge">e-Waste Center</span><span class="badge">City Hub</span><span class="badge">Green NGO</span></div></div></div>
-                </div>
-                <div class="navbar" style="border-top:1px solid var(--line);padding:8px 0;text-align:center;color:#cfe7ff">EcoVision</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <section id="page2_ewaste" class="page2 hidden">
     <div class="formCard">
       <h2>Recycle your E-Waste</h2>
@@ -578,33 +562,60 @@ input[type=range]::-moz-range-track{background:transparent}
   });
 })();
 
-/* New Landing Logic */
-document.getElementById('btnPhonePage').addEventListener('click', () => {
-  document.getElementById('page0').classList.add('hidden');
-  document.getElementById('page1').classList.remove('hidden');
+/* --- GLOBAL NAVIGATION LOGIC --- */
+const allPages = ['page1', 'page2', 'page1_ewaste', 'page2_ewaste'];
+let currentPage = 'page1_ewaste'; // Default starting page
+const globalBackBtn = document.getElementById('globalBackBtn');
+
+function navigate(toId) {
+  allPages.forEach(id => {
+    const el = document.getElementById(id);
+    if(el) {
+      if(id === toId) el.classList.remove('hidden');
+      else el.classList.add('hidden');
+    }
+  });
+  currentPage = toId;
+  
+  if(toId === 'page1' || toId === 'page1_ewaste') {
+    globalBackBtn.classList.add('hidden');
+  } else {
+    globalBackBtn.classList.remove('hidden');
+  }
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+globalBackBtn.addEventListener('click', () => {
+  if(currentPage === 'page2_ewaste') navigate('page1_ewaste');
+  if(currentPage === 'page2') navigate('page1');
+});
+
+document.getElementById('switchPhoneBtn').addEventListener('click', () => {
+  navigate('page1');
   setTimeout(openAppAuto, 100);
 });
-document.getElementById('btnRecycleOnly').addEventListener('click', () => {
-  document.getElementById('page0').classList.add('hidden');
-  document.getElementById('page1_ewaste').classList.remove('hidden');
+
+document.getElementById('switchEwasteBtn').addEventListener('click', () => {
+  navigate('page1_ewaste');
   setTimeout(openEAppAuto, 100);
 });
 
 document.getElementById('nextBtn_e').addEventListener('click', () => {
-  document.getElementById('page1_ewaste').classList.add('hidden');
-  const page2e = document.getElementById('page2_ewaste');
-  page2e.classList.remove('hidden');
-  page2e.scrollIntoView({behavior:'smooth',block:'start'});
+  navigate('page2_ewaste');
+});
+
+document.getElementById('nextBtn').addEventListener('click', () => {
+  navigate('page2');
 });
 
 
-/* Original Walkthrough (Phone) */
+/* Walkthrough (Phone) */
 let opened=false;const s0=document.getElementById('s0'),s1=document.getElementById('s1');const bar=document.getElementById('bar'),label=document.getElementById('label');const vStages=[...document.querySelectorAll('#page1 .viewport .stage')];let vidx=1,speedMs=1600,timer=null;
 function openAppAuto(){if(opened) return; opened=true; try{s0.classList.remove('active');s1.classList.add('active');label.textContent='Walkthrough playing…';bar.style.width=(2/14*100)+'%';setTimeout(()=>{playInner(1)},380)}catch(_){}} 
 function playInner(start){try{clearInterval(timer);vidx=start;showInner(vidx);timer=setInterval(()=>{vidx=(vidx%13)+1;showInner(vidx)},speedMs)}catch(_){}} 
 function showInner(i){try{vStages.forEach((s,n)=>s.classList.toggle('active',n===i-1));const outerStep=i+1;bar.style.width=(outerStep/14*100)+'%';if(i===7){document.getElementById('gauge')?.style.setProperty('--pct','66%');const p=document.getElementById('price');if(p)p.textContent='₹12,800'}}catch(_){}} 
 
-/* New Walkthrough (E-Waste) */
+/* Walkthrough (E-Waste) */
 let openedE=false;
 const s0_e=document.getElementById('s0_e'), s1_e=document.getElementById('s1_e');
 const bar_e=document.getElementById('bar_e'), label_e=document.getElementById('label_e');
@@ -641,8 +652,9 @@ window.addEventListener('load',()=>{try{
   document.getElementById('ewasteImg1').src=drawPhonePNG({cracked:false});
   document.getElementById('ewasteImg2').src=drawPhonePNG({back:true});
 
+  // Call E-Waste auto animation by default after splash
+  setTimeout(openEAppAuto, 800);
 }catch(_){}});
-document.getElementById('nextBtn').addEventListener('click',()=>{const page2=document.getElementById('page2');page2.classList.remove('hidden');setTimeout(()=>page2.scrollIntoView({behavior:'smooth',block:'start'}),30)});
 
 /* Form + range */
 const form=document.getElementById('ecoForm');const bat=document.getElementById('bat');const batOut=document.getElementById('batOut');
@@ -657,7 +669,7 @@ document.querySelectorAll('.pill[data-name]').forEach(btn=>btn.addEventListener(
   state[name]=btn.dataset.val;
 }));
 
-document.getElementById('resetBtn').addEventListener('click',()=>{form.reset();setTimeout(paintRange,0);document.querySelectorAll('.pill[aria-pressed="true"]').forEach(b=>b.setAttribute('aria-pressed','false'));Object.keys(state).forEach(k=>state[k]=null);hideAllSteps();document.getElementById('resultBlock').classList.remove('show');document.getElementById('page2').scrollIntoView({behavior:'smooth',block:'start'})});
+document.getElementById('resetBtn').addEventListener('click',()=>{form.reset();setTimeout(paintRange,0);document.querySelectorAll('.pill[aria-pressed="true"]').forEach(b=>b.setAttribute('aria-pressed','false'));Object.keys(state).forEach(k=>state[k]=null);hideAllSteps();document.getElementById('resultBlock').classList.remove('show'); window.scrollTo({top:0, behavior:'smooth'});});
 function show(el){el.classList.add('show')}
 function hide(el){el.classList.remove('show')}
 function hideAllSteps(){['qRecycle','qLocation','qMoney','partners','donate','ask'].forEach(id=>{const el=document.getElementById(id);if(el)hide(el)})}
@@ -737,7 +749,7 @@ document.getElementById('predictBtn_ewaste').addEventListener('click', async () 
 document.querySelectorAll('#qRecycle .pill').forEach(btn=>btn.addEventListener('click',()=>{btn.dataset.val==='yes'?show(document.getElementById('qLocation')):(hideAllSteps(),show(document.getElementById('ask')))}));
 document.querySelectorAll('#qLocation .pill').forEach(btn=>btn.addEventListener('click',()=>{document.getElementById('locStatus').style.display='block';show(document.getElementById('qMoney'))}));
 document.querySelectorAll('#qMoney .pill').forEach(btn=>btn.addEventListener('click',()=>{const wantMoney=btn.dataset.val==='yes';if(wantMoney){renderPartners();show(document.getElementById('partners'));show(document.getElementById('ask'))}else{show(document.getElementById('donate'));show(document.getElementById('ask'))}}));
-document.getElementById('restartFlow').addEventListener('click',()=>{hideAllSteps();document.getElementById('resultBlock').classList.remove('show');document.getElementById('page2').scrollIntoView({behavior:'smooth',block:'start'})});
+document.getElementById('restartFlow').addEventListener('click',()=>{hideAllSteps();document.getElementById('resultBlock').classList.remove('show'); window.scrollTo({top:0, behavior:'smooth'});});
 
 /* Partners */
 const partnerData={
