@@ -435,7 +435,6 @@ input[type=range]::-moz-range-track{background:transparent}
         <div class="actions">
           <button id="chooseDir" class="ghost" type="button">Choose Save Folder</button>
           <button id="predictBtn" class="primary" type="button"><span id="predSpin" class="spin" style="display:none"></span> <span id="predText">Predict</span></button>
-          <button id="resetBtn" class="ghost" type="button">Reset</button>
         </div>
         <div id="saveHint" class="small"></div>
       </form>
@@ -465,8 +464,11 @@ input[type=range]::-moz-range-track{background:transparent}
         </div>
 
         <div id="partners" class="step">
-          <div class="k">We can connect you to:</div>
-          <div id="partnersList" class="badges" style="margin-top:8px"></div>
+          <div class="k" style="font-weight:900; color:var(--accent2); margin-bottom:4px; font-size:13px;">EcoVision's Recommendation:</div>
+          <div id="primaryPartner" class="badges" style="margin-bottom:12px"></div>
+          
+          <div class="k" style="font-weight:800; margin-top:12px;">Alternative Options:</div>
+          <div id="altPartners" class="badges" style="margin-top:8px"></div>
           <div id="condNote" style="margin-top:8px;color:var(--muted)"></div>
         </div>
 
@@ -669,7 +671,6 @@ document.querySelectorAll('.pill[data-name]').forEach(btn=>btn.addEventListener(
   state[name]=btn.dataset.val;
 }));
 
-document.getElementById('resetBtn').addEventListener('click',()=>{form.reset();setTimeout(paintRange,0);document.querySelectorAll('.pill[aria-pressed="true"]').forEach(b=>b.setAttribute('aria-pressed','false'));Object.keys(state).forEach(k=>state[k]=null);hideAllSteps();document.getElementById('resultBlock').classList.remove('show'); window.scrollTo({top:0, behavior:'smooth'});});
 function show(el){el.classList.add('show')}
 function hide(el){el.classList.remove('show')}
 function hideAllSteps(){['qRecycle','qLocation','qMoney','partners','donate','ask'].forEach(id=>{const el=document.getElementById(id);if(el)hide(el)})}
@@ -754,22 +755,41 @@ document.getElementById('restartFlow').addEventListener('click',()=>{hideAllStep
 /* Partners */
 const partnerData={
   "Cashify":{site:"https://www.cashify.in",contacts:[{type:"Phone",value:"+91 72900 68900"},{type:"Email",value:"support@cashify.in"}],more:"https://www.cashify.in/faq/cashify-customer-support-form"},
-  "Zolopik":{site:"https://www.zolopik.com",contacts:[{type:"Phone",value:"+91 97434 40440"},{type:"Phone",value:"88841 22253"},{type:"Email",value:"recycle@zolopik.com"}],more:"https://zolopik.com/contact/"},
+  "Zolopik Recycling":{site:"https://www.zolopik.com",contacts:[{type:"Phone",value:"+91 97434 40440"},{type:"Phone",value:"88841 22253"},{type:"Email",value:"recycle@zolopik.com"}],more:"https://zolopik.com/contact/"},
   "Servify":{site:"https://servify.com",contacts:[{type:"Phone",value:"1800 123 333 888"},{type:"Email",value:"support@servify.tech"}],more:"https://servify.com/contact-us/"},
   "Attero":{site:"https://www.attero.in",contacts:[{type:"Phone",value:"+91 93555 41464"}],more:"https://www.attero.in/e-waste-collection-centers"},
-  "Karo Sambhav":{site:"https://karosambhav.com",contacts:[{type:"Phone",value:"1800 2121 434"},{type:"Email",value:"engage@karosambhav.com"}],more:"https://www.karosambhav.com/collection-centres"},
-  "ReGlobe (→ Cashify)":{site:"https://www.cashify.in/about-us",contacts:[{type:"Note",value:"Brand integrated with Cashify. Use Cashify contacts."}],more:"https://www.cashify.in/about-us"}
+  "Karo Sambhav":{site:"https://karosambhav.com",contacts:[{type:"Phone",value:"1800 2121 434"},{type:"Email",value:"engage@karosambhav.com"}],more:"https://www.karosambhav.com/collection-centres"}
 };
-function renderPartners(){
-  const age=parseFloat(document.getElementById('age').value||'0');
-  const bh=parseInt(document.getElementById('bat').value||'0',10);
-  const camOk=state.cam==='yes'; const portOk=state.port==='yes';
-  const isWorking=camOk&&portOk&&bh>=70&&age<=4;
-  const list=document.getElementById('partnersList'); list.innerHTML='';
-  const order=isWorking?["Cashify","Servify","Karo Sambhav","Zolopik","Attero","ReGlobe (→ Cashify)"]:["Zolopik","Attero","Karo Sambhav","Cashify","Servify","ReGlobe (→ Cashify)"];
-  order.forEach(name=>{const b=document.createElement('span');b.className='badge';b.textContent=name;b.onclick=()=>openSheet(name);list.appendChild(b)});
-  document.getElementById('condNote').textContent=isWorking?"Working condition: try Cashify/Servify first; Karo Sambhav programmes; others for recycle.":"Not fully working: try Zolopik/Attero for recycle; Karo Sambhav programmes; resale may still quote.";
+
+function renderPartners() {
+  const primary = document.getElementById('primaryPartner');
+  const alt = document.getElementById('altPartners');
+  primary.innerHTML = '';
+  alt.innerHTML = '';
+
+  // Primary Recommendation: Cashify
+  const bMain = document.createElement('span');
+  bMain.className = 'badge';
+  bMain.style.background = 'var(--accent2)';
+  bMain.style.color = '#fff';
+  bMain.style.borderColor = 'var(--accent2)';
+  bMain.textContent = 'Cashify';
+  bMain.onclick = () => openSheet('Cashify');
+  primary.appendChild(bMain);
+
+  // Alternative Options
+  const alts = ["Zolopik Recycling", "Servify", "Karo Sambhav", "Attero"];
+  alts.forEach(name => {
+    const b = document.createElement('span');
+    b.className = 'badge';
+    b.textContent = name;
+    b.onclick = () => openSheet(name);
+    alt.appendChild(b);
+  });
+
+  document.getElementById('condNote').textContent = "Cashify is our top recommendation for value. Zolopik Recycling is a great alternative for dedicated e-waste recycling.";
 }
+
 const sheet=document.getElementById('sheet'),sheetTitle=document.getElementById('sheetTitle'),sheetContacts=document.getElementById('sheetContacts'),sheetLinks=document.getElementById('sheetLinks'),sheetScript=document.getElementById('sheetScript');
 document.getElementById('sheetClose').addEventListener('click',()=>sheet.classList.remove('open'));
 document.getElementById('copyScript').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(sheetScript.textContent);alert('Copied!')}catch{}});
