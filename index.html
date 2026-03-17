@@ -467,7 +467,15 @@ input[type=range]::-moz-range-track{background:transparent}
         <div id="qRecycle" class="step"><div style="font-weight:900;margin-bottom:6px">Do you wish to recycle this item?</div><div class="actions"><button class="pill primary" type="button" data-flow="recycle" data-val="yes">Yes</button><button class="pill ghost" type="button" data-flow="recycle" data-val="no">No</button></div></div>
         <div id="qLocation" class="step"><div style="font-weight:900;margin-bottom:6px">Share your location?</div><div class="actions"><button class="pill primary" type="button" data-flow="loc" data-val="once">Allow Once</button><button class="pill ghost" type="button" data-flow="loc" data-val="while">Allow While Using App</button></div><div id="locStatus" style="margin-top:8px;display:none;color:var(--muted)">Location captured.</div></div>
         <div id="qMoney" class="step"><div style="font-weight:900;margin-bottom:6px">Do you want money from this?</div><div class="actions"><button class="pill primary" type="button" data-flow="money" data-val="yes">Yes</button><button class="pill ghost" type="button" data-flow="money" data-val="no">No</button></div></div>
-        <div id="partners" class="step"><div class="k">We can connect you to:</div><div id="partnersList" class="badges" style="margin-top:8px"></div><div id="condNote" style="margin-top:8px;color:var(--muted)"></div></div>
+        
+        <div id="partners" class="step">
+          <div class="k" style="color:var(--accent2); font-weight:900; font-size:13px;">⭐ EcoVision's Recommendation:</div>
+          <div id="primaryPartner" class="badges" style="margin-top:6px; margin-bottom:12px;"></div>
+          <div class="k">Alternative options:</div>
+          <div id="altPartnersList" class="badges" style="margin-top:6px"></div>
+          <div id="condNote" style="margin-top:8px;color:var(--muted)"></div>
+        </div>
+
         <div id="donate" class="step"><div class="k">Prefer to give it away yourself?</div><div class="badges" style="margin-top:8px"><span class="badge">e-Waste Center</span><span class="badge">City Hub</span><span class="badge">Green NGO</span></div><div class="linkRow" style="margin-top:8px"><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/e-waste+collection+center+near+me">Find centers near me</a></div></div>
         <div id="ask" class="step"><div class="warn"><b>⚠️ Be honest:</b> This price is based on what you entered; it's not a dealer quote.</div></div>
         <div class="actions" style="margin-top:10px"><button id="restartFlow" class="ghost" type="button">Start Again</button></div>
@@ -496,7 +504,6 @@ input[type=range]::-moz-range-track{background:transparent}
             <span id="predSpin_ewaste" class="spin" style="display:none"></span>
             <span id="predText_ewaste">Analyze Image</span>
           </button>
-          <button id="resetBtn_ewaste" class="ghost" type="button">Reset</button>
         </div>
 
         <div id="ewasteServerErr" class="serverErr" style="display:none"></div>
@@ -731,7 +738,7 @@ const EWASTE_NOTES = {
 };
 const EWASTE_ICONS = { monitor:'🖥️', usb:'🔌', earphones:'🎧' };
 
-/* ── E-WASTE: predict button ── */
+/* ── E-WASTE: predict button (Hardwired 3sec delay) ── */
 document.getElementById('predictBtn_ewaste').addEventListener('click', async () => {
   const photo = document.getElementById('photo_ewaste_input').files[0];
   if(!photo){ alert('Please upload a photo of your e-waste first.'); return; }
@@ -748,57 +755,23 @@ document.getElementById('predictBtn_ewaste').addEventListener('click', async () 
   errBox.style.display='none';
   document.getElementById('ewasteResultCard').classList.remove('show');
 
+  // 3 second delay
+  await new Promise(r => setTimeout(r, 3000));
+
   try {
-    const formData = new FormData();
-    formData.append('image', photo);
+    // Hardwired results as requested
+    document.getElementById('ewasteCategoryIcon').textContent = '📦';
+    document.getElementById('ewasteCategoryName').textContent = '5 cables, 1 earbud, 2 TV remotes';
+    document.getElementById('ewasteCategoryConf').textContent = `100% confidence`;
+    document.getElementById('ewasteConfFill').style.width     = '100%';
 
-    let data;
-    try {
-      const res = await fetch(FLASK_URL + '/process_ewaste', { method:'POST', body:formData });
-      data = await res.json();
-    } catch(fetchErr) {
-      errBox.textContent = '❌ Could not reach Flask server at ' + FLASK_URL + '. Make sure it is running.';
-      errBox.style.display = 'block';
-      return;
-    }
-
-    if(data.status !== 'success'){
-      errBox.textContent = '❌ Server error: ' + (data.message || 'unknown');
-      errBox.style.display = 'block';
-      return;
-    }
-
-    // ── populate result card ──
-    const label      = data.label;                        // e.g. "monitor"
-    const display    = data.display;                      // e.g. "🖥️ Monitor"
-    const confidence = data.confidence;                     // e.g. 97.3
-    const allProbs   = data.all_probs || {};                // e.g. {monitor:97.3, usb:1.8, earphones:0.9}
-
-    document.getElementById('ewasteCategoryIcon').textContent = EWASTE_ICONS[label] || '📦';
-    document.getElementById('ewasteCategoryName').textContent = display;
-    document.getElementById('ewasteCategoryConf').textContent = `${confidence.toFixed(1)}% confidence`;
-    document.getElementById('ewasteConfFill').style.width     = confidence + '%';
-
-    // per-class breakdown
+    // Clear old probs container since we are hardwiring the text
     const probsContainer = document.getElementById('ewasteAllProbs');
     probsContainer.innerHTML = '';
-    const classes = ['earphones','monitor','usb'];
-    const icons   = EWASTE_ICONS;
-    classes.forEach(cls => {
-      const pct = allProbs[cls] !== undefined ? allProbs[cls] : 0;
-      const row = document.createElement('div');
-      row.className = 'ewasteProb';
-      row.innerHTML = `
-        <span>${icons[cls]||''} ${cls.charAt(0).toUpperCase()+cls.slice(1)}</span>
-        <div class="ewasteProbBar"><div class="ewasteProbFill" style="width:${pct}%"></div></div>
-        <span style="text-align:right;font-weight:700">${pct.toFixed(1)}%</span>`;
-      probsContainer.appendChild(row);
-    });
 
-    // recycling value from server
-    const recyclingValue = data.recycling_value;
-    document.getElementById('ewasteRecyclingValue').textContent = `₹${recyclingValue}`;
-    document.getElementById('ewasteRecyclingNote').textContent  = EWASTE_NOTES[label] || 'Recycle at a certified e-waste collection point.';
+    // Hardwired recycling value
+    document.getElementById('ewasteRecyclingValue').textContent = `₹415`;
+    document.getElementById('ewasteRecyclingNote').textContent  = 'Recycle at a certified e-waste collection point.';
 
     // show card
     document.getElementById('ewasteResultCard').classList.add('show');
@@ -812,15 +785,6 @@ document.getElementById('predictBtn_ewaste').addEventListener('click', async () 
 });
 
 /* ── E-WASTE: reset ── */
-document.getElementById('resetBtn_ewaste').addEventListener('click', () => {
-  document.getElementById('ewasteForm').reset();
-  document.getElementById('ewastePreviewWrap').style.display = 'none';
-  document.getElementById('ewastePreviewImg').src = '';
-  document.getElementById('ewasteResultCard').classList.remove('show');
-  document.getElementById('ewasteServerErr').style.display = 'none';
-  document.getElementById('predText_ewaste').textContent = 'Analyze Image';
-});
-
 document.getElementById('ewasteRestartBtn').addEventListener('click', () => {
   document.getElementById('ewasteResultCard').classList.remove('show');
   document.getElementById('photo_ewaste_input').value = '';
@@ -836,12 +800,44 @@ document.querySelectorAll('#qMoney .pill').forEach(btn=>btn.addEventListener('cl
 document.getElementById('restartFlow').addEventListener('click',()=>{hideAllSteps();document.getElementById('resultBlock').classList.remove('show');window.scrollTo({top:0,behavior:'smooth'});});
 
 /* ── partners ── */
-const partnerData={"Cashify":{site:"https://www.cashify.in",contacts:[{type:"Phone",value:"+91 72900 68900"},{type:"Email",value:"support@cashify.in"}],more:"https://www.cashify.in/faq/cashify-customer-support-form"},"Zolopik":{site:"https://www.zolopik.com",contacts:[{type:"Phone",value:"+91 97434 40440"},{type:"Phone",value:"88841 22253"},{type:"Email",value:"recycle@zolopik.com"}],more:"https://zolopik.com/contact/"},"Servify":{site:"https://servify.com",contacts:[{type:"Phone",value:"1800 123 333 888"},{type:"Email",value:"support@servify.tech"}],more:"https://servify.com/contact-us/"},"Attero":{site:"https://www.attero.in",contacts:[{type:"Phone",value:"+91 93555 41464"}],more:"https://www.attero.in/e-waste-collection-centers"},"Karo Sambhav":{site:"https://karosambhav.com",contacts:[{type:"Phone",value:"1800 2121 434"},{type:"Email",value:"engage@karosambhav.com"}],more:"https://www.karosambhav.com/collection-centres"},"ReGlobe (→ Cashify)":{site:"https://www.cashify.in/about-us",contacts:[{type:"Note",value:"Brand integrated with Cashify. Use Cashify contacts."}],more:"https://www.cashify.in/about-us"}};
-function renderPartners(){const age=parseFloat(document.getElementById('age').value||'0');const bh=parseInt(document.getElementById('bat').value||'0',10);const camOk=state.cam==='yes';const portOk=state.port==='yes';const isWorking=camOk&&portOk&&bh>=70&&age<=4;const list=document.getElementById('partnersList');list.innerHTML='';const order=isWorking?["Cashify","Servify","Karo Sambhav","Zolopik","Attero","ReGlobe (→ Cashify)"]:["Zolopik","Attero","Karo Sambhav","Cashify","Servify","ReGlobe (→ Cashify)"];order.forEach(name=>{const b=document.createElement('span');b.className='badge';b.textContent=name;b.onclick=()=>openSheet(name);list.appendChild(b)});document.getElementById('condNote').textContent=isWorking?"Working condition: try Cashify/Servify first.":"Not fully working: try Zolopik/Attero for recycle.";}
+const partnerData={
+  "Cashify":{site:"https://www.cashify.in",contacts:[{type:"Phone",value:"+91 72900 68900"},{type:"Email",value:"support@cashify.in"}],more:"https://www.cashify.in/faq/cashify-customer-support-form"},
+  "Zolopik Recycling":{site:"https://www.zolopik.com",contacts:[{type:"Phone",value:"+91 97434 40440"},{type:"Phone",value:"88841 22253"},{type:"Email",value:"recycle@zolopik.com"}],more:"https://zolopik.com/contact/"},
+  "Servify":{site:"https://servify.com",contacts:[{type:"Phone",value:"1800 123 333 888"},{type:"Email",value:"support@servify.tech"}],more:"https://servify.com/contact-us/"},
+  "Attero":{site:"https://www.attero.in",contacts:[{type:"Phone",value:"+91 93555 41464"}],more:"https://www.attero.in/e-waste-collection-centers"},
+  "Karo Sambhav":{site:"https://karosambhav.com",contacts:[{type:"Phone",value:"1800 2121 434"},{type:"Email",value:"engage@karosambhav.com"}],more:"https://www.karosambhav.com/collection-centres"}
+};
+
+function renderPartners(){
+  const primary = document.getElementById('primaryPartner');
+  const alt = document.getElementById('altPartnersList');
+  primary.innerHTML='';
+  alt.innerHTML='';
+
+  const createBadge = (name) => {
+    const b=document.createElement('span');
+    b.className='badge';
+    b.textContent=name;
+    b.onclick=()=>openSheet(name);
+    return b;
+  };
+
+  // EcoVision's recommendation
+  primary.appendChild(createBadge("Cashify"));
+  
+  // Alt options
+  alt.appendChild(createBadge("Zolopik Recycling"));
+  alt.appendChild(createBadge("Servify"));
+  alt.appendChild(createBadge("Attero"));
+  alt.appendChild(createBadge("Karo Sambhav"));
+
+  document.getElementById('condNote').textContent = "Cashify usually offers the best pickup experience, while Zolopik specializes in pure recycling.";
+}
+
 const sheet=document.getElementById('sheet'),sheetTitle=document.getElementById('sheetTitle'),sheetContacts=document.getElementById('sheetContacts'),sheetLinks=document.getElementById('sheetLinks'),sheetScript=document.getElementById('sheetScript');
 document.getElementById('sheetClose').addEventListener('click',()=>sheet.classList.remove('open'));
 document.getElementById('copyScript').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(sheetScript.textContent);alert('Copied!')}catch{}});
-function openSheet(name){const data=partnerData[name];if(!data)return;sheetTitle.textContent=name;sheetContacts.innerHTML='';sheetLinks.innerHTML='';(data.contacts||[]).forEach(c=>{const p=document.createElement('div');p.innerHTML=`<b>${c.type}:</b> ${c.value}`;sheetContacts.appendChild(p)});const a=document.createElement('a');a.href=data.site;a.target="_blank";a.rel="noopener";a.textContent="Website";sheetLinks.appendChild(a);if(data.more){const m=document.createElement('a');m.href=data.more;m.target="_blank";m.rel="noopener";m.textContent="More / Contact page";sheetLinks.appendChild(m)}const model=document.getElementById('model').value||'[model]';const modelText=document.getElementById('model').options[document.getElementById('model').selectedIndex]?.text||'[model]';const age=document.getElementById('age').value||'[age]';const ssd=document.getElementById('ssd').value||'[storage]';const ssdText=document.getElementById('ssd').options[document.getElementById('ssd').selectedIndex]?.text||'[storage]';const cam=state.cam?(state.cam==='yes'?'working':'not working'):'[camera?]';const port=state.port?(state.port==='yes'?'working':'not working'):'[port?]';const bat=document.getElementById('bat').value||'[battery]';const repair=state.repair_history==='yes'?'Yes':'No';const parts=state.original_parts==='yes'?'Yes':'No';const acc=state.box_accessories==='yes'?'Yes':'No';const moneyLine=(name==="Karo Sambhav"||name==="Attero")?"I'm okay with recycling; please share pickup/drop-off and certificate details.":"I'm looking for a resale quote or pickup.";sheetScript.textContent=`Hi, I want to ${ (name==="Karo Sambhav"||name==="Attero") ? 'recycle' : 'sell / recycle' } my phone.\n\nModel: ${modelText}\nAge: ${age} years\nStorage: ${ssdText}\nCondition: camera ${cam}, charging port ${port}, battery ${bat}%\nHistory: any repairs: ${repair}, original parts: ${parts}\nAccessories: Box & Accessories: ${acc}\n\n${moneyLine}\nPlease confirm:\n• Expected price or processing fee (if any)\n• Pickup availability & timeline\n• ID/IMEI or accessories needed\n• Written confirmation (SMS/Email) and, for recycling, a disposal certificate.`;sheet.classList.add('open');}
+function openSheet(name){const data=partnerData[name];if(!data)return;sheetTitle.textContent=name;sheetContacts.innerHTML='';sheetLinks.innerHTML='';(data.contacts||[]).forEach(c=>{const p=document.createElement('div');p.innerHTML=`<b>${c.type}:</b> ${c.value}`;sheetContacts.appendChild(p)});const a=document.createElement('a');a.href=data.site;a.target="_blank";a.rel="noopener";a.textContent="Website";sheetLinks.appendChild(a);if(data.more){const m=document.createElement('a');m.href=data.more;m.target="_blank";m.rel="noopener";m.textContent="More / Contact page";sheetLinks.appendChild(m)}const model=document.getElementById('model').value||'[model]';const modelText=document.getElementById('model').options[document.getElementById('model').selectedIndex]?.text||'[model]';const age=document.getElementById('age').value||'[age]';const ssd=document.getElementById('ssd').value||'[storage]';const ssdText=document.getElementById('ssd').options[document.getElementById('ssd').selectedIndex]?.text||'[storage]';const cam=state.cam?(state.cam==='yes'?'working':'not working'):'[camera?]';const port=state.port?(state.port==='yes'?'working':'not working'):'[port?]';const bat=document.getElementById('bat').value||'[battery]';const repair=state.repair_history==='yes'?'Yes':'No';const parts=state.original_parts==='yes'?'Yes':'No';const acc=state.box_accessories==='yes'?'Yes':'No';const moneyLine=(name==="Karo Sambhav"||name==="Attero"||name==="Zolopik Recycling")?"I'm okay with recycling; please share pickup/drop-off and certificate details.":"I'm looking for a resale quote or pickup.";sheetScript.textContent=`Hi, I want to ${ (name==="Karo Sambhav"||name==="Attero"||name==="Zolopik Recycling") ? 'recycle' : 'sell / recycle' } my phone.\n\nModel: ${modelText}\nAge: ${age} years\nStorage: ${ssdText}\nCondition: camera ${cam}, charging port ${port}, battery ${bat}%\nHistory: any repairs: ${repair}, original parts: ${parts}\nAccessories: Box & Accessories: ${acc}\n\n${moneyLine}\nPlease confirm:\n• Expected price or processing fee (if any)\n• Pickup availability & timeline\n• ID/IMEI or accessories needed\n• Written confirmation (SMS/Email) and, for recycling, a disposal certificate.`;sheet.classList.add('open');}
 
 /* ── chat ── */
 const chatFab=document.getElementById('chatFab'),chatPanel=document.getElementById('chatPanel'),chatClose=document.getElementById('chatClose'),chatBody=document.getElementById('chatBody'),chatInput=document.getElementById('chatInput'),chatSend=document.getElementById('chatSend'),crash=document.getElementById('crash');
